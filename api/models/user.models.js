@@ -21,6 +21,15 @@ const User = sequelize.define(
                 }
             }
         },
+        birth : {
+            type: DataTypes.DATE,
+        },
+        phone: {
+            type: DataTypes.INTEGER,
+        },
+        address: {
+            type: DataTypes.STRING,
+        },
         password: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -28,6 +37,18 @@ const User = sequelize.define(
         verify: {
             type: DataTypes.BOOLEAN,
             allowNull: false,
+        },
+        rol: {
+                type: DataTypes.BOOLEAN,
+                allowNull: false,
+        },
+        design: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+        },
+        printed: {
+                    type: DataTypes.BOOLEAN,
+                    allowNull: false,
         },           
         createdAt: {
             type: DataTypes.STRING,
