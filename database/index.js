@@ -1,11 +1,32 @@
 const { Sequelize } = require('sequelize')
 
-// Connect to PostgreSQL creating a new sequelize instance
-const sequelize = new Sequelize(process.env.DATABASE, process.env.USERNAME, process.env.PASSWORD, {
+const sequelize = new Sequelize(process.env.DBNAME, process.env.USERNAME, process.env.PASSWORD, {
 	host: process.env.HOST,
 	dialect: process.env.DIALECT,
-	port: process.env.DB_PORT,
-	logging: false,
+	port: process.env.DBPORT,
+	logging: false
 })
 
-module.exports = { sequelize }
+async function checkConnection() {
+	try {
+		await sequelize.authenticate()
+		console.log('Connection Succesful! :D')
+	} catch (error) {
+		throw error
+	}
+}
+
+async function syncModels() {
+	try {
+		await sequelize.sync()
+		console.log('Models Synced! :D')
+	} catch (error) {
+		throw error
+	}
+}
+
+module.exports = {
+	sequelize,
+	checkConnection,
+	syncModels
+}
