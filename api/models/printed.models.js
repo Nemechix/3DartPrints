@@ -4,11 +4,23 @@ const { sequelize } = require('../../database')
 const Printed = sequelize.define(
     'printed',
     {
-        trademark: {
+        brand: {
             type: DataTypes.STRING,
             allowNull: false,
         },
         model: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        tech: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        speed: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        dimensions: {
             type: DataTypes.STRING,
             allowNull: false,
         },

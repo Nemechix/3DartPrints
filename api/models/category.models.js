@@ -1,8 +1,8 @@
 const { DataTypes } = require('sequelize')
 const { sequelize } = require('../../database')
 
-const Design = sequelize.define(
-    'design',
+const Category = sequelize.define(
+    'category',
     {
         name: {
             type: DataTypes.STRING,
@@ -16,12 +16,8 @@ const Design = sequelize.define(
             type: DataTypes.STRING,
             allowNull: false,
         },
-        file: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
     },
     { updatedAt: false }
 )
 
-module.exports = Design
+module.exports = Category
