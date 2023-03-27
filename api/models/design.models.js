@@ -1,14 +1,18 @@
 const { DataTypes } = require('sequelize')
 const { sequelize } = require('../../database')
 
-const Printed = sequelize.define(
-    'printed',
+const Design = sequelize.define(
+    'design',
     {
-        trademark: {
+        name: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        model: {
+        description: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        image: {
             type: DataTypes.STRING,
             allowNull: false,
         },
@@ -16,4 +20,4 @@ const Printed = sequelize.define(
     { updatedAt: false }
 )
 
-module.exports = Printed
+module.exports = Design
