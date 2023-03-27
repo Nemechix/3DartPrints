@@ -1,30 +1,26 @@
 const { DataTypes } = require('sequelize')
 const { sequelize } = require('../../database')
 
-const Printer = sequelize.define(
-    'printer',
+const Order = sequelize.define(
+    'order',
     {
-        brand: {
+        price: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        model: {
+        description: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        tech: {
+        file: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        speed: {
+        image: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        resolution: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        dimensions: {
+        file: {
             type: DataTypes.STRING,
             allowNull: false,
         },
@@ -32,4 +28,4 @@ const Printer = sequelize.define(
     { updatedAt: false }
 )
 
-module.exports = Printer
+module.exports = Order
