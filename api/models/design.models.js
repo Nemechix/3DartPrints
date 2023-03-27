@@ -23,7 +23,7 @@ const Design = sequelize.define(
         file: {
             type: DataTypes.STRING,
             allowNull: false,
-        },
+        }
     },
     { updatedAt: false }
 )

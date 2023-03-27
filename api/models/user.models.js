@@ -38,7 +38,7 @@ const User = sequelize.define(
             type: DataTypes.STRING,
             allowNull: false,
         },
-        verify: {
+        verified: {
             type: DataTypes.BOOLEAN,
             allowNull: false,
         },
@@ -46,20 +46,20 @@ const User = sequelize.define(
                 type: DataTypes.BOOLEAN,
                 allowNull: false,
         },
-        design: {
+        designer: {
             type: DataTypes.BOOLEAN,
             allowNull: false,
         },
-        printed: {
+        printer: {
                     type: DataTypes.BOOLEAN,
                     allowNull: false,
-        },           
-        createdAt: {
+        }           
+/*         createdAt: {
             type: DataTypes.STRING,
             defaultValue: function () {
                 return new Date()
             }
-        },
+        }, */
     },
     { updatedAt: false }
 )
