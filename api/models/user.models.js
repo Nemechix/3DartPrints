@@ -53,7 +53,7 @@ const User = sequelize.define(
         printer: {
                     type: DataTypes.BOOLEAN,
                     allowNull: false,
-        }           
+
 /*         createdAt: {
             type: DataTypes.STRING,
             defaultValue: function () {

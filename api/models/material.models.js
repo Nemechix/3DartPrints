@@ -1,10 +1,10 @@
 const { DataTypes } = require('sequelize')
 const { sequelize } = require('../../database')
 
-const Category = sequelize.define(
-    'category',
+const Material = sequelize.define(
+    'material',
     {
-        name: {
+        material_type: {
             type: DataTypes.STRING,
             allowNull: false,
         },
@@ -12,4 +12,4 @@ const Category = sequelize.define(
     { updatedAt: false }
 )
 
-module.exports = Category
+module.exports = Material
