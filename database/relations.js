@@ -41,5 +41,4 @@ function addRelationsToModels() {
     }
 }
 
-module.exports = Relations
-
+module.exports = addRelationsToModels
