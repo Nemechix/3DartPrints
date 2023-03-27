@@ -54,12 +54,12 @@ const User = sequelize.define(
                     type: DataTypes.BOOLEAN,
                     allowNull: false,
         },           
-        createdAt: {
+/*         createdAt: {
             type: DataTypes.STRING,
             defaultValue: function () {
                 return new Date()
             }
-        },
+        }, */
     },
     { updatedAt: false }
 )
