@@ -18,12 +18,12 @@ async function createUser(req, res) {
     }
 }
 
-async function getUserById(req,res) {
-    try{
+async function getUserById(req, res) {
+    try {
         const user = await User.findByPk(req.params.id)
-        if(user){
+        if (user) {
             return res.status(200).json(user)
-        } else { 
+        } else {
             return res.status(404).send('User not found')
         }
     } catch (error) {
@@ -31,8 +31,8 @@ async function getUserById(req,res) {
     }
 }
 
-async function deleteUserById(req,res){
-    try{
+async function deleteUserById(req, res) {
+    try {
         const user = await User.destroy({
             where: {
                 id: req.params.id
@@ -84,5 +84,47 @@ async function getUserDesignsById(req, res) {
     }
 }
 
+async function getUserPrintersById(req, res) {
+    try {
+        const user = await User.findByPk(req.params.id, {
+            include: {
+                model: Printer,
+                as: 'printers'
+            }
+        });
+        if (user) {
+            return res.status(200).json(user.printers);
+        } else {
+            return res.status(404).send('User not found');
+        }
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+}
 
-module.exports = {getAllUsers, createUser, getUserById, deleteUserById, updateUserById, getUserDesignsById}
+async function getUserPrinterMaterials(req, res) {
+    try {
+        const user = await User.findByPk(req.params.userId, {
+            include: {
+                model: Printer,
+                as: 'printers',
+                where: { id: req.params.printerId },
+                include: {
+                    model: Material,
+                    as: 'materials'
+                }
+            }
+        });
+        if (user) {
+            return res.status(200).json(user.printers[0].materials);
+        } else {
+            return res.status(404).send('User not found');
+        }
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+}
+
+
+
+module.exports = { getAllUsers, createUser, getUserById, deleteUserById, updateUserById, getUserDesignsById, getUserPrintersById, getUserPrinterMaterials, }
