@@ -11,7 +11,7 @@ const User = sequelize.define(
         surname: {
             type: DataTypes.STRING,
             allowNull: false,
-        },       
+        },
         username: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -25,7 +25,7 @@ const User = sequelize.define(
                 }
             }
         },
-        birth : {
+        birth: {
             type: DataTypes.DATE,
         },
         phone: {
@@ -43,25 +43,25 @@ const User = sequelize.define(
             allowNull: false,
         },
         rol: {
-                type: DataTypes.BOOLEAN,
-                allowNull: false,
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
         },
         designer: {
             type: DataTypes.BOOLEAN,
             allowNull: false,
         },
         printer: {
-                    type: DataTypes.BOOLEAN,
-                    allowNull: false,
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
 
-/*         createdAt: {
-            type: DataTypes.STRING,
-            defaultValue: function () {
-                return new Date()
-            }
-        }, */
-    },
-    { updatedAt: false }
+            /*         createdAt: {
+                        type: DataTypes.STRING,
+                        defaultValue: function () {
+                            return new Date()
+                        }
+                    }, */
+        },
+     updatedAt: false }
 )
-
+    
 module.exports = User
