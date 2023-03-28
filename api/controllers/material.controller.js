@@ -1,84 +1,78 @@
-const Design = require('../models/material.models')
+const Material = require('../models/material.models')
 
-async function getAllDesign(req, res) {
+
+
+// GET	./material
+async function getAllMaterial(req, res) {
     try {
-        const designs = await Design.findAll()
-        return res.status(200).json(designs)
+        const material = await Material.findAll()
+        return res.status(200).json(material)
     } catch (error) {
         return res.status(500).json(error)
     }
 }
 
-async function createDesign(req, res) {
+// GET	./material/:materialId
+async function getMaterialById(req, res) {
     try {
-        const design = await Design.create(req.body)
-        return res.status(200).json({ message: 'Design created', design: design })
-    } catch (error) {
-        return res.status(500).json(error)
-    }
-}
-
-async function updateDesignById(req, res) {
-    try {
-        const [updated] = await Design.update(req.body, {
-            where: {
-                id: req.params.id,
-            },
-        })
-        console.log(updated)
-        if (updated) {
-            return res.status(200).json({ message: 'Design updated' })
+        const material = await Material.findByPk(req.params.id)
+        if (material) {
+            return res.status(200).json(material)
         } else {
-            return res.status(404).send('Design not found')
-        }
-    } catch (error) {
-        return res.status(500).send(error.message)
-    }
-}
-
-async function deleteDesignById(req, res) {
-    try {
-        const design = await Design.destroy({
-            where: {
-                id: req.params.id
-            },
-        })
-        if (design) {
-            return res.status(200).json('Design Deleted')
-        } else {
-            return res.status(404).send('Design not found')
-        }
-    } catch (error) {
-        return res.status(500).send(error.message)
-    }
-}
-
-async function getDesignById(req, res) {
-    try {
-        const design = await Design.findByPk(req.params.id)
-        if (design) {
-            return res.status(200).json(design)
-        } else {
-            return res.status(404).send('Design not found')
+            return res.status(404).send('Material not found')
         }
     } catch (error) {
         res.status(500).send(error.message)
     }
 }
 
+// POST	./material
+async function createMaterial(req, res) {
+    try {
+        const material = await Material.create(req.body)
+        return res.status(200).json({ message: 'Material created', material: material })
+    } catch (error) {
+        return res.status(500).json(error)
+    }
+}
+
+// PUT	./material
+async function updateMaterialById(req, res) {
+    try {
+        const [updated] = await Material.update(req.body, {
+            where: {
+                id: req.params.id,
+            },
+        })
+        console.log(updated)
+        if (updated) {
+            return res.status(200).json({ message: 'Material updated' })
+        } else {
+            return res.status(404).send('Material not found')
+        }
+    } catch (error) {
+        return res.status(500).send(error.message)
+    }
+}
+
+// DELETE  ./material
+async function deleteMaterialById(req, res) {
+    try {
+        const material = await Material.destroy({
+            where: {
+                id: req.params.id
+            },
+        })
+        if (material) {
+            return res.status(200).json('Material Deleted')
+        } else {
+            return res.status(404).send('Material not found')
+        }
+    } catch (error) {
+        return res.status(500).send(error.message)
+    }
+}
 
 
 
-
-
-
-
-
-
-
-
-router.get('/', getAllMaterial)
-router.get('/:materialId', getMaterialById)
-router.post('/', createMaterial)
-router.put('/:materialId', updateMaterialById)
-router.delete('/:materialId', deleteMaterialById)
+module.exports = { getAllMaterial, getMaterialById, createMaterial, updateMaterialById, deleteMaterialById }
