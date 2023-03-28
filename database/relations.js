@@ -9,6 +9,7 @@ const OrderPrints = require('../api/models/orderprints.models')
 const OrderDesign = require('../api/models/orderdesign.models')
 const Order = require('../api/models/order.models')
 
+
 function addRelationsToModels() {
     try {
 
