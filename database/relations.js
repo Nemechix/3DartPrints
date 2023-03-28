@@ -1,6 +1,8 @@
 const User = require('../api/models/user.models')
 const Design = require('../api/models/design.models')
+const Software = require('../api/models/software.models')
 const Printer = require('../api/models/printer.models')
+const UserPrinter = require('../api/models/userprinter.models')
 const Category = require('../api/models/category.models')
 const Material = require('../api/models/material.models')
 const Order = require('../api/models/order.models')
@@ -11,22 +13,21 @@ function addRelationsToModels() {
         User.hasMany(Design)
         Design.belongsTo(User)
 
+
         //table design_category
         Category.hasMany(Design)
         Design.belongsTo(Category)
 
-        //table user_printer
-        User.belongsToMany(Printer, { through: 'user_printer' })
-        Printer.belongsToMany(User, { through: 'user_printer' })
+
+        //table design_software
+        Software.belongsToMany(Design, { through: 'design_software' })
+        Design.belongsToMany(Software, { through: 'design_software' })
 
 
         //table printer_materials
-        Material.belongsToMany(User, { through: 'printer_materials' })
-        User.belongsToMany(Material, { through: 'printer_materials' })
-        Material.belongsToMany(Printer, { through: 'printer_materials' })
-        Printer.belongsToMany(Material, { through: 'printer_materials' })
-        User.belongsToMany(Printer, { through: 'printer_materials' })
-        Printer.belongsToMany(User, { through: 'printer_materials' })
+        Material.belongsToMany(UserPrinter, { through: 'printer_materials' })
+        UserPrinter.belongsToMany(Material, { through: 'printer_materials' })
+
 
         //table order_prints
         Order.hasOne(User)
@@ -38,7 +39,7 @@ function addRelationsToModels() {
         Printer.belongsTo(Order)
         Material.belongsTo(Order)
 
-        console.log('Relations added to all models') 
+        console.log('Relations added to all models')
     } catch (error) {
         throw error
     }
