@@ -145,5 +145,42 @@ async function linkPrinterToUser(req, res) {
     }
 }
 
+async function uploadDesignByUser(req, res) {
+    try {
+        const user = await User.findByPk(req.params.id);
 
-module.exports = { getAllUsers, createUser, getUserById, deleteUserById, updateUserById, getUserDesignsById, getUserPrintersById, getUserPrinterMaterials, linkPrinterToUser }
+        if (!user) {
+            return res.status(404).send('User not found');
+        }
+        const design = await Design.create({
+            name: req.body.name,
+            description: req.body.description,
+            file: req.body.file,
+            image: req.body.image
+        });
+        await user.addDesign(design);
+
+        return res.status(201).send('Design created');
+    } catch (error) {
+        console.log(error);
+        res.status(500).send(error.message);
+    }
+}
+
+async function getMyProfile(req, res) {
+    try {
+        const user = await User.findByPk(req.user.id);
+        if (user) {
+            return res.status(200).json({ user });
+        } else {
+            return res.status(404).send('User not found');
+        }
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+}
+
+
+
+
+module.exports = { getAllUsers, createUser, getUserById, deleteUserById, updateUserById, getUserDesignsById, getUserPrintersById, getUserPrinterMaterials, linkPrinterToUser, uploadDesignByUser, getMyProfile }

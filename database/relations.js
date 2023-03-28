@@ -6,8 +6,8 @@ const UserPrinter = require('../api/models/userprinter.models')
 const Category = require('../api/models/category.models')
 const Material = require('../api/models/material.models')
 const OrderPrints = require('../api/models/orderprints.models')
-const OrderDesign = require('../api/models/orderdesign.models')
-
+/* const OrderDesign = require('../api/models/orderdesign.models')
+ */
 function addRelationsToModels() {
     try {
 
