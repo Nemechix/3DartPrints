@@ -1,14 +1,19 @@
 const { DataTypes } = require('sequelize')
 const { sequelize } = require('../../database')
-const Order = require('./orderprints.models')
-const Design = require('./design.models')
+// const Order = require('./order.models')
+// const Design = require('./design.models')
 
 const OrderDesign = sequelize.define(
-    'orderdesing', {},
+    'orderdesing', {
+        price: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        }
+    },
     { updatedAt: false }
 )
 
-Design.hasMany(Order, { through: 'orderdesing' })
-Order.belongsTo(Design, { through: 'orderdesing' })
+// Design.belongsToMany(Order, { through: 'orderdesing' })
+// Order.belongsTo(Design, { through: 'orderdesing' })
 
 module.exports = OrderDesign
