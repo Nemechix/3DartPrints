@@ -17,6 +17,29 @@ CREATE TABLE 3duser (
 );
 
 
+CREATE TABLE printer (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  brand VARCHAR(255) NOT NULL,
+  model VARCHAR(255) NOT NULL,
+  tech VARCHAR(255) NOT NULL,
+  speed INTEGER(255) NOT NULL,
+  resolution DECIMAL(10, 2) NOT NULL,
+  dimensions DECIMAL(10, 2) NOT NULL
+);
+
+INSERT INTO printer (brand, model, tech, speed, resolution, dimensions) VALUES
+('Prusa Research', 'Prusa i3 MK3S+', , ,25.0, 0.05 ),
+('Creality', 'Ender 3 Pro', 22.0, 0.1,  , ,),
+('Ultimaker', 'S5', 330.0, 0.02,  , ,),
+('LulzBot', 'Taz Pro S', 280.0, 0.01, , ,),
+('FlashForge', 'Creator Pro 2',  , ,227.0, 0.05),
+('MakerBot', 'Replicator+', , , 29.5, 0.01, );
+
+CREATE TABLE software (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    version VARCHAR(255),
+);
 
 
 CREATE TABLE design (
@@ -30,7 +53,13 @@ CREATE TABLE design (
 );
 
 
-
+CREATE TABLE design_sofware (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  design_id INT,
+  software_id INT,
+  FOREIGN KEY (design_id) REFERENCES design (id),
+  FOREIGN KEY (software_id) REFERENCES software (id),
+);
 
 
 CREATE TABLE order_designs (
@@ -108,25 +137,6 @@ CREATE TABLE design_category (
   category_id INT,
   FOREIGN KEY (design_id) REFERENCES design (id),
   FOREIGN KEY (category_id) REFERENCES category (id),
-
-
-CREATE TABLE printer (
-  id INT AUTO_INCREMENT PRIMARY KEY,
-  brand VARCHAR(255) NOT NULL,
-  model VARCHAR(255) NOT NULL,
-  tech VARCHAR(255) NOT NULL,
-  speed INTEGER(255) NOT NULL,
-  resolution DECIMAL(10, 2) NOT NULL,
-  dimensions DECIMAL(10, 2) NOT NULL
-);
-
-INSERT INTO printer (brand, model, tech, speed, resolution, dimensions) VALUES
-('Prusa Research', 'Prusa i3 MK3S+', , ,25.0, 0.05 ),
-('Creality', 'Ender 3 Pro', 22.0, 0.1,  , ,),
-('Ultimaker', 'S5', 330.0, 0.02,  , ,),
-('LulzBot', 'Taz Pro S', 280.0, 0.01, , ,),
-('FlashForge', 'Creator Pro 2',  , ,227.0, 0.05),
-('MakerBot', 'Replicator+', , , 29.5, 0.01, );
 
 
 
