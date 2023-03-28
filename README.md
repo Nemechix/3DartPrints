@@ -18,11 +18,12 @@
 | GET--  | /user/:userId/printer/:printerId/materials | YES  | - | Frontend gets user printer materials | -      | [{ materials }]                      |
 | GET    | /user/:userId/software    | YES   | -     | Frontend gets user softwares | -                          | [{ softwares }]                      |
 | POST   | /user/:userId/designs     | YES   | User  | Uploads a design             | designId, description, file| "Design uploaded"                    |
+| GET    | /user/me                  | YES   | User  | Get self user profile        | -                          | { user }                             |
+| PUT    | /user/me                  | YES   | User  | Update self user             | userId, param_to_update, value | "User updated"                   |
+| DELETE | /user/me                  | YES   | User  | Delete self user             | -                          | "Profile deleted"                    |
 | POST-- | /user                     | YES   | Admin | Create a user                | user_name, phone, email, date_of_birth, password, confirm_password, printer (DEFAULT NULL) designer (DEFAULT NULL) | "User created"    |
 | PUT--  | /user/:userId             | YES   | Admin | Update user                  | user_id, param_to_update, value | "User updated"                  |
 | DELETE-| /user/:userId             | YES   | Admin | Remove one user              | user_id                    | "Profile deleted"                    |
-| GET    | /user/me                  | YES   | User  | Get self user profile        | -                          | { user }                             |
-| PUT    | /user/me                  | YES   | User  | Update self user             | userId, param_to_update, value | "User updated"                   |
 
 
 ### Designs Endpoints
