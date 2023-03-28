@@ -84,10 +84,5 @@ async function getUserDesignsById(req, res) {
     }
 }
 
-/* async function getDesignByUserId(req,res) {
-    try{
-        const user = await User.findByPk
-    }
-} */
 
 module.exports = {getAllUsers, createUser, getUserById, deleteUserById, updateUserById, getUserDesignsById}
