@@ -30,11 +30,11 @@ function addRelationsToModels() {
 
 
         //table order_prints
-        Order.hasOne(User)
+        User.hasMany(Order)
         Order.hasMany(Design)
         Order.hasOne(Printer)
         Order.hasOne(Material)
-        User.belongsTo(Order)
+        Order.belongsTo(User)
         Design.belongsTo(Order)
         Printer.belongsTo(Order)
         Material.belongsTo(Order)

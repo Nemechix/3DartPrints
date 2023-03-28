@@ -1,14 +1,14 @@
 const { DataTypes } = require('sequelize')
 const { sequelize } = require('../../database')
-const User = require('user')
-const Printer = require('printer')
+const User = require('./user.models')
+const Printer = require('./printer.models')
 
-const UserPrinter = sequelize.define(
+ const UserPrinter = sequelize.define(
     'userprinter', {},
     { updatedAt: false }
-)
+) 
 
-User.belongsToMany(Printer, { through: 'user_printer' })
-Printer.belongsToMany(User, { through: 'user_printer' })
+User.belongsToMany(Printer, { through: 'userprinter' })
+Printer.belongsToMany(User, { through: 'userprinter' })
 
 module.exports = UserPrinter
