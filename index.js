@@ -8,12 +8,12 @@ const {
     syncModels
 } = require('./database/index')
 
-
+const addRelationsToModels = require('./database/relations')
 
 async function startDB() {
     await checkConnection()
-    
-    await syncModels()
+    await addRelationsToModels()
+    await syncModels('force')
 }
 
 function startExpress() {
