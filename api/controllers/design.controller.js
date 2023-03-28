@@ -10,6 +10,19 @@ async function getAllDesign(req, res) {
     }
 }
 
+async function getDesignById(req, res) {
+    try {
+        const design = await Design.findByPk(req.params.id)
+        if (design) {
+            return res.status(200).json(design)
+        } else {
+            return res.status(404).send('Design not found')
+        }
+    } catch (error) {
+        res.status(500).send(error.message)
+    }
+}
+
 async function createDesign(req, res) {
     try {
         const design = await Design.create(req.body)
@@ -54,17 +67,6 @@ async function deleteDesignById(req, res) {
     }
 }
 
-async function getDesignById(req, res) {
-    try {
-        const design = await Design.findByPk(req.params.id)
-        if (design) {
-            return res.status(200).json(design)
-        } else {
-            return res.status(404).send('Design not found')
-        }
-    } catch (error) {
-        res.status(500).send(error.message)
-    }
-}
 
-module.exports = { getAllDesign,createDesign, updateDesignById, deleteDesignById, getDesignById }
+
+module.exports = { getAllDesign, getDesignById, createDesign, updateDesignById, deleteDesignById }
