@@ -28,7 +28,6 @@ function addRelationsToModels() {
         Material.belongsToMany(UserPrinter, { through: 'printer_materials' })
         UserPrinter.belongsToMany(Material, { through: 'printer_materials' })
 
-
         //table orderprints
         User.hasMany(OrderPrints)
         Design.hasMany(OrderPrints)

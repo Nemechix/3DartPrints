@@ -1,4 +1,6 @@
 const User = require('../models/user.models')
+const Design = require('../models/design.models')
+const Printer = require('../models/printer.models')
 
 async function getAllUsers(req, res) {
     try {
@@ -125,6 +127,23 @@ async function getUserPrinterMaterials(req, res) {
     }
 }
 
+async function linkPrinterToUser(req, res) {
+    try {
+        const { printerId, userId } = req.body;
+        const printer = await Printer.findByPk(printerId);
+        const user = await User.findByPk(userId);
+
+        if (!printer || !user) {
+            return res.status(404).send('Printer or user not found');
+        }
+
+        await user.addPrinter(printer);
+
+        return res.status(201).send('Printer linked to user successfully');
+    } catch (error) {
+        return res.status(500).send(error.message);
+    }
+}
 
 
-module.exports = { getAllUsers, createUser, getUserById, deleteUserById, updateUserById, getUserDesignsById, getUserPrintersById, getUserPrinterMaterials, }
+module.exports = { getAllUsers, createUser, getUserById, deleteUserById, updateUserById, getUserDesignsById, getUserPrintersById, getUserPrinterMaterials, linkPrinterToUser }
