@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize')
 const { sequelize } = require('../../database')
-const User = require('./user')
-const Printer = require('./printer')
+const User = require('./user.models')
+const Printer = require('./printer.models')
 
 const UserPrinter = sequelize.define(
     'userprinter', {},
