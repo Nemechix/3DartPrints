@@ -14,6 +14,7 @@ async function startDB() {
     await checkConnection()
     await addRelationsToModels()
     await syncModels('force')
+
 }
 
 function startExpress() {
