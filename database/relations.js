@@ -31,13 +31,13 @@ function addRelationsToModels() {
 
         //table order_prints
         User.hasMany(Order)
-        Order.hasMany(Design)
-        Order.hasOne(Printer)
-        Order.hasOne(Material)
+        Design.hasMany(Order)
+        Printer.hasOne(Order)
+        Material.hasOne(Order)
         Order.belongsTo(User)
-        Design.belongsTo(Order)
-        Printer.belongsTo(Order)
-        Material.belongsTo(Order)
+        Order.belongsTo(Design)
+        Order.belongsTo(Printer)
+        Order.belongsTo(Material)
 
         console.log('Relations added to all models')
     } catch (error) {
