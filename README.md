@@ -28,48 +28,48 @@
 
 ### Designs Endpoints
 
-| METHOD | ENDPOINT             | TOKEN | ROLE  | DESCRIPTION                  | POST PARAMS                | RETURNS                     |
-| ------ | -------------        | ----- | ----- | ---------------------------- | -------------------------- | --------------------------- |
-| GET    | /designs             | YES   | User  | Get all designs              | -                          | [{ designs }]               |
-| GET    | /designs/:designId   | YES   | User  | Get one design               | -                          | { designs }                 |
-| POST   | /designs/:designId   | YES   | User  | Upload a design              | designObj                  | "Design inserted"           |
-| PUT    | /designs/:designId   | YES   | User  | Update a design              | designObj, param_to_update, value | "Design updated"     |
-| DELETE | /designs/:designId   | YES   | User  | Delete a design              | -                          | "Design deleted"            |
-| POST   | /designs/:designId   | YES   | Admin | Insert a design              | designObj                  | "Design inserted"           |
-| PUT    | /designs/:designId   | YES   | Admin | Modify a design              | designObj, param_to_update, value | "Design updated"     |
-| DELETE | /designs/:designId   | YES   | Admin | Delete a design              | designObj                  | "Design deleted"            |
+| METHOD | ENDPOINT            | TOKEN | ROLE  | DESCRIPTION                  | POST PARAMS                | RETURNS                     |
+| ------ | ------------------- | ----- | ----- | ---------------------------- | -------------------------- | --------------------------- |
+| GET    | /design             | YES   | User  | Get all designs              | -                          | [{ designs }]               |
+| GET    | /design/:designId   | YES   | User  | Get one design               | -                          | { designs }                 |
+| POST   | /design/:designId   | YES   | User  | Upload a design              | designObj                  | "Design inserted"           |
+| PUT    | /design/:designId   | YES   | User  | Update a design              | designObj, param_to_update, value | "Design updated"     |
+| DELETE | /design/:designId   | YES   | User  | Delete a design              | -                          | "Design deleted"            |
+| POST   | /design/:designId   | YES   | Admin | Insert a design              | designObj                  | "Design inserted"           |
+| PUT    | /design/:designId   | YES   | Admin | Modify a design              | designObj, param_to_update, value | "Design updated"     |
+| DELETE | /design/:designId   | YES   | Admin | Delete a design              | designObj                  | "Design deleted"            |
 
 
 ### Categories Endponts
 
-| METHOD | ENDPOINT                  | TOKEN | ROLE  | DESCRIPTION                  | POST PARAMS                | RETURNS                              |
-| ------ | ------------------------- | ----- | ----- | ---------------------------- | -------------------------- | ------------------------------------ |
-| GET    | /categories               | YES   | User  | Get all categories           | -                          | [{ categories }]                     |
-| GET    | /categories/:categoryId   | YES   | User  | Get a category               | -                          | { categorie }                        |
-| POST   | /categories               | YES   | Admin | Insert a categorie           | categoryObj                | "Category inserted"                  |
-| PUT    | /categories               | YES   | Admin | Modify a categorie           | categoryObj, param_to_update, value | "Category updated"          |
-| DELETE | /categories               | YES   | Admin | Delete a categorie           | categorObj                 | "Category deleted"                   |
+| METHOD | ENDPOINT                 | TOKEN | ROLE  | DESCRIPTION                  | POST PARAMS                | RETURNS                              |
+| ------ | ------------------------ | ----- | ----- | ---------------------------- | -------------------------- | ------------------------------------ |
+| GET    | /categorie               | YES   | User  | Get all categories           | -                          | [{ categories }]                     |
+| GET    | /categorie/:categoryId   | YES   | User  | Get a category               | -                          | { categorie }                        |
+| POST   | /categorie               | YES   | Admin | Insert a categorie           | categoryObj                | "Category inserted"                  |
+| PUT    | /categorie               | YES   | Admin | Modify a categorie           | categoryObj, param_to_update, value | "Category updated"          |
+| DELETE | /categorie               | YES   | Admin | Delete a categorie           | categorObj                 | "Category deleted"                   |
 
 
 ### Printers Endpoints
 
-| METHOD | ENDPOINT             | TOKEN | ROLE  | DESCRIPTION           | POST PARAMS                        | RETURNS                              |
-| ------ | -------------------- | ----- | ----- | --------------------- | ---------------------------------- | ------------------------------------ |
-| GET    | /printers            | YES   | Admin | Get all printers      | -                                  | [{ printers }]                       |
-| GET    | /printers/:printerId | YES   | Admin | Get a printer         | -                                  | { printer }                          |
-| POST   | /printers            | YES   | Admin | Insert a printer      | printerObj                         | "Printer inserted"                   |
-| PUT    | /printers            | YES   | Admin | Modify a printer      | printerObj, param_to_update, value | "Printer updated"                    |
-| DELETE | /printers            | YES   | Admin | Delete a printer      | printerObj                         | "Printer deleted"                    |
+| METHOD | ENDPOINT            | TOKEN | ROLE  | DESCRIPTION           | POST PARAMS                        | RETURNS                              |
+| ------ | ------------------- | ----- | ----- | --------------------- | ---------------------------------- | ------------------------------------ |
+| GET    | /printer            | YES   | Admin | Get all printers      | -                                  | [{ printers }]                       |
+| GET    | /printer/:printerId | YES   | Admin | Get a printer         | -                                  | { printer }                          |
+| POST   | /printer            | YES   | Admin | Insert a printer      | printerObj                         | "Printer inserted"                   |
+| PUT    | /printer            | YES   | Admin | Modify a printer      | printerObj, param_to_update, value | "Printer updated"                    |
+| DELETE | /printer            | YES   | Admin | Delete a printer      | printerObj                         | "Printer deleted"                    |
 
 
 ### Materials Endpoints
 
-| METHOD | ENDPOINT               | TOKEN | ROLE  | DESCRIPTION           | POST PARAMS                         | RETURNS                    |
-| ------ | ---------------------- | ----- | ----- | --------------------- | ----------------------------------- | -------------------------- |
-| GET    | /materials             | YES   | Admin | Get all materials     | -                                   | [{ materials }]            |
-| GET    | /materials/:materialId | YES   | Admin | Get a material        | -                                   | { material }               |
-| POST   | /materials             | YES   | Admin | Insert a material     | materialObj                         | "Material inserted"        |
-| PUT    | /materials             | YES   | Admin | Modify a material     | materialObj, param_to_update, value | "Material updated"         |
-| DELETE | /materials             | YES   | Admin | Delete a material     | materialObj                         | "Material deleted"         |
+| METHOD | ENDPOINT              | TOKEN | ROLE  | DESCRIPTION           | POST PARAMS                         | RETURNS                    |
+| ------ | --------------------- | ----- | ----- | --------------------- | ----------------------------------- | -------------------------- |
+| GET    | /material             | YES   | Admin | Get all materials     | -                                   | [{ materials }]            |
+| GET    | /material/:materialId | YES   | Admin | Get a material        | -                                   | { material }               |
+| POST   | /material             | YES   | Admin | Insert a material     | materialObj                         | "Material inserted"        |
+| PUT    | /material             | YES   | Admin | Modify a material     | materialObj, param_to_update, value | "Material updated"         |
+| DELETE | /material             | YES   | Admin | Delete a material     | materialObj                         | "Material deleted"         |
 
 
