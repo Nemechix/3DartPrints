@@ -1,6 +1,8 @@
 const User = require('../models/user.models')
 const Design = require('../models/design.models')
 const Printer = require('../models/printer.models')
+const Material = require('../models/material.models')
+const UserPrinter = require('../models/userprinter.models')
 
 async function getAllUsers(req, res) {
     try {
@@ -104,7 +106,7 @@ async function getUserPrintersById(req, res) {
     }
 }
 
-async function getUserPrinterMaterials(req, res) {
+/* async function getUserPrinterMaterials(req, res) {
     try {
         const user = await User.findByPk(req.params.userId, {
             include: {
@@ -125,7 +127,7 @@ async function getUserPrinterMaterials(req, res) {
     } catch (error) {
         res.status(500).send(error.message);
     }
-}
+} */
 
 async function linkPrinterToUser(req, res) {
     try {
@@ -180,7 +182,85 @@ async function getMyProfile(req, res) {
     }
 }
 
+async function getMyProfile(req, res) {
+    try {
+        const user = await User.delete(req.user.id);
+        if (user) {
+            return res.status(200).json({ user });
+        } else {
+            return res.status(404).send('User not found');
+        }
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+}
+
+async function deleteMyUser(req, res) {
+    try {
+        const user = req.user;
+        await user.destroy();
+        return res.status(200).send("Profile deleted");
+    } catch (error) {
+        return res.status(500).send(error.message);
+    }
+}
+
+async function updateMyUser(req, res) {
+    const userId = req.user.id; 
+    const { param_to_update, value } = req.body;
+
+    try {
+        const user = await User.findByPk(id);
+
+        if (!user) {
+            return res.status(404).send('User not found');
+        }
+        user[param_to_update] = value;
+        await user.save();
+
+        return res.send('User updated');
+    } catch (error) {
+        return res.status(500).send(error.message);
+    }
+}
+
+async function getUserPrinterMaterials(req, res) {
+    try {
+        console.log(req.params)
+        const user = await User.findByPk(req.params.userid, {
+            include: UserPrinter
+            
+                // where: {
+                //     id: req.params.printerid
+                // },
+                // include: {
+                //     model: Material,
+                //     as: 'materials'
+                // }
+            })
+            // include: [{
+            //     model: UserPrinter,
+            //     as: 'printers',
+            //     // where: {
+            //     //     id: req.params.printerid
+            //     // },
+            //     include: {
+            //         model: Material,
+            //         as: 'materials'
+            //     } 
+            // }]
+        ;
+        if (user) {
+            return res.status(200).json(user.printers[0].materials);
+        } else {
+            return res.status(404).send('User not found');
+        }
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+}
 
 
 
-module.exports = { getAllUsers, createUser, getUserById, deleteUserById, updateUserById, getUserDesignsById, getUserPrintersById, getUserPrinterMaterials, linkPrinterToUser, uploadDesignByUser, getMyProfile }
+
+module.exports = { getAllUsers, createUser, getUserById, deleteUserById, updateUserById, getUserDesignsById, getUserPrintersById, getUserPrinterMaterials, linkPrinterToUser, uploadDesignByUser, getMyProfile, deleteMyUser, updateMyUser, getUserPrinterMaterials }

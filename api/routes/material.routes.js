@@ -7,9 +7,9 @@ const {
 
 
 router.get('/', getAllMaterial)
-router.get('/:materialId', getMaterialById)
+router.get('/:id', getMaterialById)
 router.post('/', createMaterial)
-router.put('/:materialId', updateMaterialById)
-router.delete('/:materialId', deleteMaterialById)
+router.put('/:id', updateMaterialById)
+router.delete('/:id', deleteMaterialById)
 
 module.exports = router

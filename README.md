@@ -18,8 +18,8 @@
 | GET  | /user/:userId/printer/:printerId/materials | YES  | - | Frontend gets user printer materials | -      | [{ materials }]                      |
 | POST√| /user/:userId/designs     | YES   | User  | Uploads a design             | designId, description, file| "Design uploaded"                    |
 | GET√    | /user/me                  | YES   | User  | Get self user profile        | -                          | { user }                             |
-| PUT    | /user/me                  | YES   | User  | Update self user             | userId, param_to_update, value | "User updated"                   |
-| DELETE | /user/me                  | YES   | User  | Delete self user             | -                          | "Profile deleted"                    |
+| PUT√    | /user/me                  | YES   | User  | Update self user             | userId, param_to_update, value | "User updated"                   |
+| DELETE√ | /user/me                  | YES   | User  | Delete self user             | -                          | "Profile deleted"                    |
 | POST√ | /user                     | YES   | Admin | Create a user                | user_name, phone, email, date_of_birth, password, confirm_password, printer (DEFAULT NULL) designer (DEFAULT NULL) | "User created"    |
 | PUT√  | /user/:userId             | YES   | Admin | Update user                  | user_id, param_to_update, value | "User updated"                  |
 | DELETE√| /user/:userId             | YES   | Admin | Remove one user              | user_id                    | "Profile deleted"                    |
@@ -65,11 +65,11 @@
 
 | METHOD | ENDPOINT              | TOKEN | ROLE  | DESCRIPTION           | POST PARAMS                         | RETURNS                    |
 | ------ | --------------------- | ----- | ----- | --------------------- | ----------------------------------- | -------------------------- |
-| GET --   | /material             | YES   | Admin | Get all materials     | -                                   | [{ materials }]            |
-| GET --   | /material/:materialId | YES   | Admin | Get a material        | -                                   | { material }               |
-| POST --  | /material             | YES   | Admin | Insert a material     | materialObj                         | "Material inserted"        |
-| PUT --   | /material             | YES   | Admin | Modify a material     | materialObj, param_to_update, value | "Material updated"         |
-| DELETE -- | /material             | YES   | Admin | Delete a material     | materialObj                         | "Material deleted"         |
+| GET√   | /material             | YES   | Admin | Get all materials     | -                                   | [{ materials }]            |
+| GET√   | /material/:materialId | YES   | Admin | Get a material        | -                                   | { material }               |
+| POST√  | /material             | YES   | Admin | Insert a material     | materialObj                         | "Material inserted"        |
+| PUT√   | /material             | YES   | Admin | Modify a material     | materialObj, param_to_update, value | "Material updated"         |
+| DELETE√ | /material             | YES   | Admin | Delete a material     | materialObj                         | "Material deleted"         |
 
 
 ### Software Endpoints
