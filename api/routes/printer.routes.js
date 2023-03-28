@@ -4,10 +4,10 @@ const { getAllPrinters, getPrinterById, createPrinter, updatePrinterById, delete
 
 
 router.get('/', getAllPrinters)
-router.get('/:printerId', getPrinterById)
+router.get('/:id', getPrinterById)
 router.post('/', createPrinter)
-router.put('/:printerId', updatePrinterById)
-router.delete('/:printerId', deletePrinterById)
+router.put('/:id', updatePrinterById)
+router.delete('/:id', deletePrinterById)
 
 
 

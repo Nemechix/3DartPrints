@@ -5,10 +5,10 @@ const {
 } = require('../controllers/design.controller')
 
 router.get('/', getAllDesign)
-router.get('/:designId', getDesignById)
+router.get('/:id', getDesignById)
 router.post('/', createDesign)
-router.put('/:designId', updateDesignById)
-router.delete('/:designId', deleteDesignById)
+router.put('/:id', updateDesignById)
+router.delete('/:id', deleteDesignById)
 
 
 

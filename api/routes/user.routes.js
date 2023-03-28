@@ -5,13 +5,13 @@ const {
 } = require('../controllers/user.controller')
 
 router.get('/', getAllUsers)
-router.get('/:userId/', getUserById)
-router.get('/:userId/designs', getUserDesignsById)
-router.get('/:userId/printers', getUserPrintersById)
-router.get('/:userId/printers/:printerId/materials', getUserPrinterMaterials)
+router.get('/:id/', getUserById)
+router.get('/:id/designs', getUserDesignsById)
+router.get('/:id/printers', getUserPrintersById)
+router.get('/:id/printers/:id/materials', getUserPrinterMaterials)
 router.post('/', createUser)
-router.put('/:userId', updateUserById)
-router.delete('/:userId', deleteUserById)
+router.put('/:id', updateUserById)
+router.delete('/:id', deleteUserById)
 
 
 module.exports = router

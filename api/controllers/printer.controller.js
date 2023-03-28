@@ -33,7 +33,7 @@ async function createPrinter(req, res) {
 
 async function updatePrinterById(req, res) {
     try {
-        const [updated] = await Printerr.update(req.body, {
+        const [updated] = await Printer.update(req.body, {
             where: {
                 id: req.params.id,
             },
