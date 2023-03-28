@@ -54,14 +54,15 @@ const User = sequelize.define(
             type: DataTypes.BOOLEAN,
             allowNull: false,
 
-            /*         createdAt: {
-                        type: DataTypes.STRING,
-                        defaultValue: function () {
-                            return new Date()
-                        }
-                    }, */
-        },
-     updatedAt: false }
+/*         createdAt: {
+            type: DataTypes.STRING,
+            defaultValue: function () {
+                return new Date()
+            }*/
+        }, 
+    },
+    { updatedAt: false }
+
 )
     
 module.exports = User
