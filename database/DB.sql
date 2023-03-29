@@ -11,7 +11,7 @@ CREATE TABLE 3duser (
     address VARCHAR(255),
     verify BOOL(255),
     passwor VARCHAR(255),
-    rol enum(255),
+    role enum(255),
     designer boolean(255),
     printer boolean(255),
 );

@@ -150,17 +150,12 @@ async function linkPrinterToUser(req, res) {
 
 async function uploadDesignByUser(req, res) {
     try {
-        const user = await User.findByPk(req.params.id);
+        const user = req.user;
 
         if (!user) {
             return res.status(404).send('User not found');
         }
-        const design = await Design.create({
-            name: req.body.name,
-            description: req.body.description,
-            file: req.body.file,
-            image: req.body.image
-        });
+        const design = await Design.create(req.body);
         await user.addDesign(design);
 
         return res.status(201).send('Design created');
@@ -169,6 +164,8 @@ async function uploadDesignByUser(req, res) {
         res.status(500).send(error.message);
     }
 }
+
+
 
 async function getMyProfile(req, res) {
     try {

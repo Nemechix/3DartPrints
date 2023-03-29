@@ -20,9 +20,9 @@ const checkAuth = (req, res, next) => {
 }
 
 const checkAdmin = (req, res, next) => {
-    const user = req.locals.user
-    if (!user.rol == 'admin') {
-        res.status(400).send('Unauthorized')
+    const user = req.user
+    if (user.role !== 'admin') {
+       return res.status(400).send('Unauthorized')
     }
     next()
 }

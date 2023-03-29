@@ -42,8 +42,8 @@ const User = sequelize.define(
             type: DataTypes.BOOLEAN,
             allowNull: false,
         },
-        rol: {
-            type: DataTypes.BOOLEAN,
+        role: {
+            type: DataTypes.ENUM('admin', 'user'),
             allowNull: false,
         },
         designer: {
