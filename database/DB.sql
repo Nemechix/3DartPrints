@@ -1,5 +1,3 @@
-
-
 CREATE TABLE 3duser (
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
@@ -7,16 +5,18 @@ CREATE TABLE 3duser (
     username VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
     birth DATE,
-    telephone VARCHAR(255),
+    phone VARCHAR(255),
     address VARCHAR(255),
     verify BOOL(255),
     passwor VARCHAR(255),
     role enum(255),
-    designer boolean(255),
+    designs boolean(255),
     printer boolean(255),
 );
 
+INSERT INTO printer (name, surname, username, birth, phone, address, verify, passwor, role, designs, printer ) VALUES
 
+/*---------------------------------------------------------------------------------------------------------*/
 CREATE TABLE printer (
   id INT AUTO_INCREMENT PRIMARY KEY,
   brand VARCHAR(255) NOT NULL,
@@ -35,13 +35,22 @@ INSERT INTO printer (brand, model, tech, speed, resolution, dimensions) VALUES
 ('FlashForge', 'Creator Pro 2',  , ,227.0, 0.05),
 ('MakerBot', 'Replicator+', , , 29.5, 0.01, );
 
+/*---------------------------------------------------------------------------------------------------------*/
 CREATE TABLE software (
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
     version VARCHAR(255),
 );
 
+INSERT INTO sofware (name, version) VALUES
+('Blender', '6.0'),
+('Autocad', '16.0'),
+('3dStudio', '2022'),
+('STL', '6.0'),
+('Archicad', '21.0'),
+('Sketchup', '9.0'),
 
+/*---------------------------------------------------------------------------------------------------------*/
 CREATE TABLE design (
     id INT PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
@@ -52,7 +61,10 @@ CREATE TABLE design (
   FOREIGN KEY (3duser_id) REFERENCES 3duser (id),
 );
 
+INSERT INTO design (name, description, `file` , price, 3duser_id) VALUES
 
+
+/*---------------------------------------------------------------------------------------------------------*/
 CREATE TABLE design_sofware (
   id INT PRIMARY KEY AUTO_INCREMENT,
   design_id INT,
@@ -61,7 +73,17 @@ CREATE TABLE design_sofware (
   FOREIGN KEY (software_id) REFERENCES software (id),
 );
 
+INSERT INTO design_sofware (design_id, software_id) VALUES
+(2, 2),
+(1, 3),
+(4, 2),
+(1, 1),
+(1, 6),
+(1, 2),
+(3, 2);
 
+
+/*---------------------------------------------------------------------------------------------------------*/
 CREATE TABLE order_designs (
     id INT PRIMARY KEY AUTO_INCREMENT,
   3duser_id INT,
@@ -70,9 +92,17 @@ CREATE TABLE order_designs (
   FOREIGN KEY (design_id) REFERENCES design (id),
 );
 
+INSERT INTO order_designs (3duser_id, design_id) VALUES
+(2, 2),
+(1, 3),
+(4, 2),
+(1, 1),
+(1, 6),
+(1, 2),
+(3, 2);
 
 
-
+/*---------------------------------------------------------------------------------------------------------*/
 CREATE TABLE category (
     id INT PRIMARY KEY AUTO_INCREMENT,
     category_type VARCHAR(255) NOT NULL,
@@ -131,6 +161,7 @@ INSERT INTO category (category_type) VALUES
 ('Other');
 
 
+/*---------------------------------------------------------------------------------------------------------*/
 CREATE TABLE design_category (
   id INT AUTO_INCREMENT PRIMARY KEY,
   design_id INT,
@@ -138,8 +169,10 @@ CREATE TABLE design_category (
   FOREIGN KEY (design_id) REFERENCES design (id),
   FOREIGN KEY (category_id) REFERENCES category (id),
 
+INSERT INTO design_category (design_id, category_id) VALUES
 
 
+/*---------------------------------------------------------------------------------------------------------*/
 CREATE TABLE 3duser_printer (
   id INT AUTO_INCREMENT PRIMARY KEY,
   3duser_id INT,
@@ -149,14 +182,16 @@ CREATE TABLE 3duser_printer (
 );
 
 
-
+/*---------------------------------------------------------------------------------------------------------*/
 CREATE TABLE material (
   id INT AUTO_INCREMENT PRIMARY KEY,
   material_type VARCHAR(255) NOT NULL,
 );
 
+INSERT INTO material (material_type) VALUES
 
 
+/*---------------------------------------------------------------------------------------------------------*/
 CREATE TABLE printer_material (
   id INT AUTO_INCREMENT PRIMARY KEY,
   material_type VARCHAR(255) NOT NULL,
@@ -166,8 +201,10 @@ CREATE TABLE printer_material (
   FOREIGN KEY (material_id) REFERENCES material (id),
 );
 
+INSERT INTO printer_material (material_type, printer_id, material_id) VALUES
 
 
+/*---------------------------------------------------------------------------------------------------------*/
 CREATE TABLE order_prints (
   id INT AUTO_INCREMENT PRIMARY KEY,
   layer_height VARCHAR(255) NOT NULL,
@@ -183,15 +220,20 @@ CREATE TABLE order_prints (
   FOREIGN KEY (design_id) REFERENCES design (id),
   FOREIGN KEY (printer_id) REFERENCES printer (id),
   FOREIGN KEY (material_id) REFERENCES material (id),
-
 );
 
+INSERT INTO order_prints (layer_height, price, quantity, 3duser_sell_id, 3duser_buy_id, design_id, printer_id, material_id) VALUES
 
 
-
+/*---------------------------------------------------------------------------------------------------------*/
 CREATE TABLE comments (
   id INT AUTO_INCREMENT PRIMARY KEY,
   comments VARCHAR(255) NOT NULL,
   3duser_id INT,
   FOREIGN KEY (3duser_id) REFERENCES 3duser (id),
 );
+
+INSERT INTO comments (comments, 3duser_id) VALUES
+
+
+
