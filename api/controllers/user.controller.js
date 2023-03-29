@@ -219,7 +219,8 @@ async function deleteDesignByUser(req, res) {
             return res.status(400).send('User not found')
         }
     
-        const design = user.getDesigns().filter(design => design.id == req.params.id)[0]
+        const designs = await user.getDesigns()
+        const design= designs.filter(design => design.id == req.params.id)[0]
         // const design = await Design.findOne({ where: {id: req.params.id} })
         if (!design) {
             return res.status(400).send('design not found')
@@ -240,7 +241,7 @@ async function deleteDesignByUser(req, res) {
             return res.status(404).send('Cannot delete the design')
         }        
     } catch (error) {
-        return res.status(500).send('ERROR: ', error.message)
+        return res.status(500).send(error.message)
     }
 
 }
@@ -252,7 +253,8 @@ async function updateDesignByUser(req, res) {
             return res.status(400).send('User not found')
         }
     
-        const design = user.getDesigns().filter(design => design.id == req.params.id)[0]
+        const designs = await user.getDesigns()
+        const design = designs.filter(design => design.id == req.params.id)[0]
         // const design = await Design.findOne({ where: { id: req.params.id } })
         if (!design) {
             return res.status(400).send('Design not found')
@@ -273,7 +275,7 @@ async function updateDesignByUser(req, res) {
             return res.status(404).send('Cannot update design')
         }        
     } catch (error) {
-        return res.status(500).send('ERROR: ', error.message)
+        return res.status(500).send(error.message)
     }
 }
 
@@ -284,7 +286,8 @@ async function unlinkPrinterToUser(req, res) {
             return res.status(400).send('User not found')
         }
 
-        const printer = user.getPrinters().filter(printer => printer.id == req.params.id)[0]
+        const printers = await user.getPrinters()
+        const printer = printers.filter(printer => printer.id == req.params.id)[0]
         // const printer = await Printer.findOne({ where: { id: req.params.id } })
         if (!printer) {
             return res.status(400).send('Printer not found')
@@ -302,7 +305,7 @@ async function unlinkPrinterToUser(req, res) {
         }        
         
     } catch (error) {
-        return res.status(500).send('ERROR: ', error.message)
+        return res.status(500).send(error.message)
     }
 }
 
@@ -313,7 +316,8 @@ async function updatePrinterFromUser(req, res) {
             return res.status(400).send('User not found')
         }
 
-        const printer = user.getPrinters().filter(printer => printer.id == req.params.id)[0]
+        const printers = await user.getPrinters()
+        const printer = printers.filter(printer => printer.id == req.params.id)[0]
         // const printer = await Printer.findOne({ where: { id: req.params.id } })
         if (!printer) {
             return res.status(400).send('Printer not found')
@@ -331,7 +335,7 @@ async function updatePrinterFromUser(req, res) {
         }
 
     } catch (error) {
-        return res.status(500).send('ERROR: ', error.message)
+        return res.status(500).send(error.message)
     }
 }
 

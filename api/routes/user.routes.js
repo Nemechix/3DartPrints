@@ -24,14 +24,6 @@ const { checkAuth, checkAdmin } = require('../middleware/auth')
 router.get('/', getAllUsers)
 router.get('/me', checkAuth, getMyProfile)
 router.delete('/me', checkAuth, deleteMyUser)
-//mis diseños put ++
-//mis diseños delete ++
-//mis printers put ++
-//mis printers delete ++
-//mis software put x
-//mis software delete x
-//mis software get x
-//mis software post x
 router.put('/me', checkAuth, updateMyUser)
 router.get('/:id/', getUserById)
 router.get('/:id/designs', getUserDesignsById)
