@@ -2,7 +2,7 @@
 const jwt = require('jsonwebtoken')
 const User = require('../models/user.models')
 
-const checkAuth = (req, res) => {
+const checkAuth = (req, res, next) => {
     const token = req.headers.token
 
     jwt.verify(token, process.env.SECRET, async (err, payload) => {
@@ -14,8 +14,17 @@ const checkAuth = (req, res) => {
         if (!user) {
             return res.status(400).send('invalid token')
         }
+        req.user = user
+        next()
     })
-
 }
 
-module.exports = checkAuth
+const checkAdmin = (req, res, next) => {
+    const user = req.locals.user
+    if (!user.rol == 'admin') {
+        res.status(400).send('Unauthorized')
+    }
+    next()
+}
+
+module.exports = {checkAuth, checkAdmin}

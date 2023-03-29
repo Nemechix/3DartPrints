@@ -1,3 +1,4 @@
+const { Op } = require("sequelize")
 const User = require('../models/user.models')
 const Design = require('../models/design.models')
 const Printer = require('../models/printer.models')
@@ -171,7 +172,8 @@ async function uploadDesignByUser(req, res) {
 
 async function getMyProfile(req, res) {
     try {
-        const user = await User.findByPk(req.user.id);
+        const user = req.user;
+        console.log(user)
         if (user) {
             return res.status(200).json({ user });
         } else {
@@ -182,18 +184,6 @@ async function getMyProfile(req, res) {
     }
 }
 
-async function getMyProfile(req, res) {
-    try {
-        const user = await User.delete(req.user.id);
-        if (user) {
-            return res.status(200).json({ user });
-        } else {
-            return res.status(404).send('User not found');
-        }
-    } catch (error) {
-        res.status(500).send(error.message);
-    }
-}
 
 async function deleteMyUser(req, res) {
     try {
@@ -206,12 +196,12 @@ async function deleteMyUser(req, res) {
 }
 
 async function updateMyUser(req, res) {
-    const userId = req.user.id; 
+    const user = req.user; 
     const { param_to_update, value } = req.body;
+    console.log(user)
+    console.log(value)
 
     try {
-        const user = await User.findByPk(id);
-
         if (!user) {
             return res.status(404).send('User not found');
         }
@@ -226,9 +216,8 @@ async function updateMyUser(req, res) {
 
 async function getUserPrinterMaterials(req, res) {
     try {
-        console.log(req.params)
         const user = await User.findByPk(req.params.userid, {
-            include: UserPrinter
+            //include: UserPrinter
             
                 // where: {
                 //     id: req.params.printerid
@@ -238,6 +227,10 @@ async function getUserPrinterMaterials(req, res) {
                 //     as: 'materials'
                 // }
             })
+            const printers = await user.getPrinters()
+            const result = await myFunction(printers, user)
+           
+
             // include: [{
             //     model: UserPrinter,
             //     as: 'printers',
@@ -249,9 +242,10 @@ async function getUserPrinterMaterials(req, res) {
             //         as: 'materials'
             //     } 
             // }]
-        ;
+        
         if (user) {
-            return res.status(200).json(user.printers[0].materials);
+           // return res.status(200).json(user.printers[0].materials);
+           res.status(200).send(result)
         } else {
             return res.status(404).send('User not found');
         }
@@ -260,6 +254,19 @@ async function getUserPrinterMaterials(req, res) {
     }
 }
 
+async function myFunction(printers, user) {
+    const result = await Promise.all(printers.map(async (printer) => {
+        const userPrinter = await UserPrinter.findOne({ where: { [Op.and]: [{ userId: user.id }, { printerId: printer.id }] } })
+        // console.log(userPrinter)
+        const materials = await userPrinter.getMaterials()
+        // console.log(materials)
+        const info = { printerInfo: printer, materials: materials }
+
+        return info
+    }))
+
+    return result
+}
 
 
 
