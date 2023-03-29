@@ -3,7 +3,7 @@ const router = require('express').Router()
 const {
     getAllUsers, createUser, getUserById, deleteUserById, updateUserById, getUserDesignsById, getUserPrinterMaterials, getUserPrintersById, linkPrinterToUser, uploadDesignByUser, getMyProfile, deleteMyUser, updateMyUser
 } = require('../controllers/user.controller')
-const { checkAuth } = require('../middleware/auth')
+const { checkAuth, checkAdmin } = require('../middleware/auth')
 
 router.get('/', getAllUsers)
 router.get('/me', checkAuth, getMyProfile)
@@ -13,11 +13,11 @@ router.get('/:id/', getUserById)
 router.get('/:id/designs', getUserDesignsById)
 router.post('/:id/designs', checkAuth, uploadDesignByUser);
 router.get('/:id/printers', getUserPrintersById)
-router.post('/:id/printers/:id', linkPrinterToUser);
-router.get('/:userid/printers/:printerid/materials', getUserPrinterMaterials)
-router.post('/', createUser)
-router.put('/:id', updateUserById)
-router.delete('/:id', deleteUserById)
+router.post('/:id/printers/:id', checkAuth, linkPrinterToUser);
+router.get('/:userid/printers/:printerid/materials',checkAuth, getUserPrinterMaterials)
+router.post('/',checkAuth, checkAdmin, createUser)
+router.put('/:id', checkAuth, checkAdmin, updateUserById)
+router.delete('/:id', checkAuth, checkAdmin, deleteUserById)
 
 
 module.exports = router

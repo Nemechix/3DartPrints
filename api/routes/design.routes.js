@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { checkAuth } = require('../middleware/auth')
+const { checkAuth, checkAdmin } = require('../middleware/auth')
 
 const {
     getAllDesign, createDesign, updateDesignById, deleteDesignById, getDesignById
@@ -7,9 +7,9 @@ const {
 
 router.get('/', getAllDesign)
 router.get('/:id', getDesignById)
-router.post('/', checkAuth, createDesign)
-router.put('/:id', checkAuth, updateDesignById)
-router.delete('/:id', checkAuth, deleteDesignById)
+router.post('/', checkAuth, checkAdmin, createDesign)
+router.put('/:id', checkAuth, checkAdmin, updateDesignById)
+router.delete('/:id', checkAuth, checkAdmin, deleteDesignById)
 
 
 

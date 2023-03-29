@@ -6,9 +6,9 @@ const {checkAuth, checkAdmin } = require('../middleware/auth')
 
 router.get('/', getAllPrinters)
 router.get('/:id', getPrinterById)
-router.post('/', createPrinter)
+router.post('/', checkAuth, checkAdmin, createPrinter)
 router.put('/:id',checkAuth, checkAdmin, updatePrinterById)
-router.delete('/:id', deletePrinterById)
+router.delete('/:id', checkAuth, checkAdmin, deletePrinterById)
 
 
 
