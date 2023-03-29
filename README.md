@@ -73,9 +73,9 @@
 
 | METHOD | ENDPOINT              | TOKEN | ROLE  | DESCRIPTION           | POST PARAMS                         | RETURNS                    |
 | ------ | --------------------- | ----- | ----- | --------------------- | ----------------------------------- | -------------------------- |
-| GET    | /software             | YES   | Admin | Get all softwares     | -                                   | [{ softwares }]            |
-| GET    | /software/:softwareId | YES   | Admin | Get a software        | -                                   | { software }               |
-| POST   | /software             | YES   | Admin | Insert a software     | softwareObj                         | "Software inserted"        |
-| PUT    | /software             | YES   | Admin | Modify a software     | softwareObj, param_to_update, value | "Software updated"         |
-| DELETE | /software             | YES   | Admin | Delete a software     | softwareObj                         | "Software deleted"         |
+| GET√    | /software             | YES   | Admin | Get all softwares     | -                                   | [{ softwares }]            |
+| GET√   | /software/:softwareId | YES   | Admin | Get a software        | -                                   | { software }               |
+| POST√   | /software             | YES   | Admin | Insert a software     | softwareObj                         | "Software inserted"        |
+| PUT√    | /software             | YES   | Admin | Modify a software     | softwareObj, param_to_update, value | "Software updated"         |
+| DELETE√ | /software             | YES   | Admin | Delete a software     | softwareObj                         | "Software deleted"         |
 
