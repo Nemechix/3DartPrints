@@ -3,6 +3,7 @@ const User = require('../models/user.models')
 const Design = require('../models/design.models')
 const Printer = require('../models/printer.models')
 const Material = require('../models/material.models')
+const Software = require('../models/software.models')
 const UserPrinter = require('../models/userprinter.models')
 
 async function getAllUsers(req, res) {
@@ -211,6 +212,129 @@ async function updateMyUser(req, res) {
     }
 }
 
+async function deleteDesignByUser(req, res) {
+    try {
+        const user = req.user
+        if (!user) {
+            return res.status(400).send('User not found')
+        }
+    
+        const design = user.getDesigns().filter(design => design.id == req.params.id)[0]
+        // const design = await Design.findOne({ where: {id: req.params.id} })
+        if (!design) {
+            return res.status(400).send('design not found')
+        }
+    
+        if (!user.hasDesign(design)) {
+            return res.status(400).send('Unauthorized')
+        }
+    
+        const destroyed = await Design.destroy({
+            where: {
+                id: req.params.id
+            },
+        })
+        if (destroyed) {
+            return res.status(200).json('Design Deleted')
+        } else {
+            return res.status(404).send('Cannot delete the design')
+        }        
+    } catch (error) {
+        return res.status(500).send('ERROR: ', error.message)
+    }
+
+}
+
+async function updateDesignByUser(req, res) {
+    try {
+        const user = req.user
+        if (!user) {
+            return res.status(400).send('User not found')
+        }
+    
+        const design = user.getDesigns().filter(design => design.id == req.params.id)[0]
+        // const design = await Design.findOne({ where: { id: req.params.id } })
+        if (!design) {
+            return res.status(400).send('Design not found')
+        }
+    
+        if (!user.hasDesign(design)) {
+            return res.status(400).send('Unauthorized')
+        }
+    
+        const [updated] = await Design.update(req.body, {
+            where: {
+                id: req.params.id,
+            },
+        })
+        if (updated) {
+            return res.status(200).json({ message: 'Design updated' })
+        } else {
+            return res.status(404).send('Cannot update design')
+        }        
+    } catch (error) {
+        return res.status(500).send('ERROR: ', error.message)
+    }
+}
+
+async function unlinkPrinterToUser(req, res) {
+    try {
+        const user = req.user
+        if (!user) {
+            return res.status(400).send('User not found')
+        }
+
+        const printer = user.getPrinters().filter(printer => printer.id == req.params.id)[0]
+        // const printer = await Printer.findOne({ where: { id: req.params.id } })
+        if (!printer) {
+            return res.status(400).send('Printer not found')
+        }
+
+        if (!user.hasPrinter(printer)) {
+            return res.status(400).send('Unauthorized')
+        }
+
+        const removed = await user.removePrinter(printer)
+        if(removed) {
+            return res.status(200).json({ message: 'Printer removed' })
+        } else {
+            return res.status(404).send('Cannot remove printer')
+        }        
+        
+    } catch (error) {
+        return res.status(500).send('ERROR: ', error.message)
+    }
+}
+
+async function updatePrinterFromUser(req, res) {
+    try {
+        const user = req.user
+        if (!user) {
+            return res.status(400).send('User not found')
+        }
+
+        const printer = user.getPrinters().filter(printer => printer.id == req.params.id)[0]
+        // const printer = await Printer.findOne({ where: { id: req.params.id } })
+        if (!printer) {
+            return res.status(400).send('Printer not found')
+        }
+
+        if (!user.hasPrinter(printer)) {
+            return res.status(400).send('Unauthorized')
+        }
+
+        const updated = false //Do stuff
+        if (updated) {
+            return res.status(200).json({ message: 'Printer updated' })
+        } else {
+            return res.status(404).send('Cannot update printer')
+        }
+
+    } catch (error) {
+        return res.status(500).send('ERROR: ', error.message)
+    }
+}
+
 async function getUserPrinterMaterials(req, res) {
     try {
         const user = await User.findByPk(req.params.userid, {
@@ -267,4 +391,23 @@ async function myFunction(printers, user) {
 
 
 
-module.exports = { getAllUsers, createUser, getUserById, deleteUserById, updateUserById, getUserDesignsById, getUserPrintersById, getUserPrinterMaterials, linkPrinterToUser, uploadDesignByUser, getMyProfile, deleteMyUser, updateMyUser, getUserPrinterMaterials }
+module.exports = {
+    getAllUsers,
+    createUser,
+    getUserById,
+    deleteUserById,
+    updateUserById,
+    getUserDesignsById,
+    getUserPrintersById,
+    getUserPrinterMaterials,
+    linkPrinterToUser,
+    uploadDesignByUser,
+    getMyProfile,
+    deleteMyUser,
+    updateMyUser,
+    getUserPrinterMaterials,
+    deleteDesignByUser,
+    updateDesignByUser,
+    unlinkPrinterToUser,
+    updatePrinterFromUser
+}
