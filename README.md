@@ -34,7 +34,7 @@
 | POST√ | /design/:designId   | YES   | Admin | Create a design              | designObj                  | "Design inserted"           |
 | PUT√  | /design/:designId   | YES   | Admin | Modify a design              | designObj, param_to_update, value | "Design updated"     |
 | DELETE√ | /design/:designId   | YES   | Admin | Delete a design              | designObj                  | "Design deleted"            |
-| GET | /:design/:designId   | YES   | USER | Delete a design              | designObj                  | "Design deleted"            |
+| GET√ | /:design/:designId   | YES   | USER | Delete a design              | designObj                  | "Design deleted"            |
 
 
 
@@ -43,11 +43,11 @@
 | METHOD | ENDPOINT                 | TOKEN | ROLE  | DESCRIPTION                  | POST PARAMS                | RETURNS                              |
 | ------ | ------------------------ | ----- | ----- | ---------------------------- | -------------------------- | ------------------------------------ |
 | GET√   | /category              | YES   | User  | Get all categories           | -                          | [{ categories }]                     |
-| GET√   | /categorie/:categoryId   | YES   | User  | Get a category               | -                          | { categorie }                        |
+| GET√   | /category/:categoryId   | YES   | User  | Get a category               | -                          | { categorie }                        |
 | POST√  | /category              | YES   | Admin | Insert a categorie           | categoryObj                | "Category inserted"                  |
 | PUT√   | /category              | YES   | Admin | Modify a categorie           | categoryObj, param_to_update, value | "Category updated"          |
 | DELETE√| /category             | YES   | Admin | Delete a categorie           | categorObj                 | "Category deleted"                   |
-| GET| /:categoryid/designs            | YES   | USER | Get all designs from a category           |                  | "Category deleted"                   |
+| GET√   | /:categoryid/designs            | YES   | USER | Get all designs from a category           |                  | "Category deleted"                   |
 
 
 
