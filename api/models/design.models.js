@@ -20,8 +20,8 @@ const Design = sequelize.define(
             type: DataTypes.STRING,
             allowNull: false,
         },
-        file: {
-            type: DataTypes.STRING,
+        price: {
+            type: DataTypes.FLOAT,
             allowNull: false,
         }
     },
