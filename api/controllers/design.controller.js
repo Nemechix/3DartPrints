@@ -10,6 +10,15 @@ async function getAllDesign(req, res) {
     }
 }
 
+async function getRandomDesign(req, res) {
+    try {
+        const random = await Design.random()
+        return res.status(200).json(random)
+    } catch (error) {
+        return res.status(500).json(error)
+    }
+}
+
 async function getDesignById(req, res) {
     try {
         const design = await Design.findByPk(req.params.id)
@@ -85,4 +94,4 @@ async function getCategoryByDesignId(req, res) {
 
 
 
-module.exports = { getAllDesign, getDesignById, createDesign, updateDesignById, deleteDesignById, getCategoryByDesignId }
+module.exports = { getAllDesign,getRandomDesign, getDesignById, createDesign, updateDesignById, deleteDesignById, getCategoryByDesignId }

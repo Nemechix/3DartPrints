@@ -7,10 +7,12 @@ const {
     createCategory,
     updateCategoryById,
     deleteCategoryById,
-    getDesignsByCategoryId
+    getDesignsByCategoryId,
+    getRandomCategory
 } = require('../controllers/category.controller')
 
 router.get('/', getAllCategories)
+router.get('/random', getRandomCategory)
 router.get('/:id/designs', getDesignsByCategoryId)
 router.get('/:id', getCategoryById)
 router.post('/', checkAuth, checkAdmin, createCategory)

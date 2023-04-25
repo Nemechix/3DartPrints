@@ -12,6 +12,15 @@ async function getAllCategories(req, res) {
     }
 }
 
+async function getRandomCategory(req, res) {
+    try {
+        const random = await Category.random()
+        return res.status(200).json(random)
+    } catch (error) {
+        return res.status(500).json(error)
+    }
+}
+
 async function getCategoryById(req, res) {
     try {
         const category = await Category.findOne({ where: {id: req.params.id} })
@@ -84,4 +93,4 @@ async function getDesignsByCategoryId(req, res) {
 
 
 
-module.exports = { getAllCategories, getCategoryById, createCategory, updateCategoryById, deleteCategoryById, getDesignsByCategoryId }
+module.exports = { getAllCategories, getCategoryById, createCategory, updateCategoryById, deleteCategoryById, getDesignsByCategoryId,getRandomCategory }
