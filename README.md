@@ -83,3 +83,10 @@
 | PUT√    | /software             | YES   | Admin | Modify a software     | softwareObj, param_to_update, value | "Software updated"         |
 | DELETE√ | /software             | YES   | Admin | Delete a software     | softwareObj                         | "Software deleted"         |
 
+
+### Cart Endpoints
+
+| METHOD | ENDPOINT              | TOKEN | ROLE  | DESCRIPTION           | POST PARAMS                         | RETURNS                    |
+| ------ | --------------------- | ----- | ----- | --------------------- | ----------------------------------- | -------------------------- |
+| GET√    | /cart                | YES   | Admin | Get all cart          | -                                   | [{ cart }]            |
+| GET√    | /cart/:cartId        | YES   | Admin | Get a cart            | -                                   | { cart }               |
