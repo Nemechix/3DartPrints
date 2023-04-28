@@ -8,6 +8,8 @@ const Material = require('../api/models/material.models')
 const OrderPrints = require('../api/models/orderprints.models')
 const OrderDesign = require('../api/models/orderdesign.models')
 const Order = require('../api/models/order.models')
+const Cart = require('../api/models/cart_models')
+const Favorites = require('../api/models/favorites_models')
 
 
 function addRelationsToModels() {
@@ -58,6 +60,25 @@ function addRelationsToModels() {
         Order.belongsTo(User)
         Order.belongsTo(OrderDesign)
         Order.belongsTo(OrderPrints)
+
+
+        // Relationships
+        User.hasMany(Cart);
+        Cart.belongsTo(User);
+
+        Design.hasMany(Cart);
+        Cart.belongsTo(Design);
+
+        User.hasMany(Favorites);
+        Favorites.belongsTo(User);
+
+        Design.hasMany(Favorites);
+        Favorites.belongsTo(Design);
+
+
+
+
+
 
         console.log('Relations added to all models')
     } catch (error) {

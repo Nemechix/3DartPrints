@@ -10,7 +10,7 @@ CREATE TABLE 3duser (
     telephone VARCHAR(255),
     address VARCHAR(255),
     verify BOOL(255),
-    passwor VARCHAR(255),
+    password VARCHAR(255),
     role enum(255),
     designer boolean(255),
     printer boolean(255),
@@ -137,7 +137,7 @@ CREATE TABLE design_category (
   category_id INT,
   FOREIGN KEY (design_id) REFERENCES design (id),
   FOREIGN KEY (category_id) REFERENCES category (id),
-
+);
 
 
 CREATE TABLE 3duser_printer (
@@ -194,4 +194,21 @@ CREATE TABLE comments (
   comments VARCHAR(255) NOT NULL,
   3duser_id INT,
   FOREIGN KEY (3duser_id) REFERENCES 3duser (id),
+);
+
+
+CREATE TABLE cart (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  3duser_id INT,
+  design_id INT,
+  FOREIGN KEY (3duser_id) REFERENCES 3duser (id),
+  FOREIGN KEY (design_id) REFERENCES design (id)
+);
+
+CREATE TABLE favorites (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  3duser_id INT,
+  design_id INT,
+  FOREIGN KEY (3duser_id) REFERENCES 3duser (id),
+  FOREIGN KEY (design_id) REFERENCES design (id)
 );
