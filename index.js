@@ -4,7 +4,6 @@ const express = require('express')
 const api = express();
 const cors = require('cors')
 
-app.use(cors())
 
 const {
     checkConnection,
@@ -24,6 +23,8 @@ function startExpress() {
     const app = express()
         .use(express.json())
         .use(morgan('dev'))
+        .use(cors())
+
 
         .use('/api', require('./api/routes/index'))
 
