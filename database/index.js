@@ -1,11 +1,11 @@
 const { Sequelize } = require('sequelize')
 // const Design = require('../api/models/design.models')
 
-const sequelize = new Sequelize(process.env.DATABASE, process.env.USERNAME, process.env.PASSWORD, {
-	host: process.env.HOST,
-	dialect: process.env.DIALECT,
-	port: process.env.DBPORT,
-	logging: false
+const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASS, {
+    host: process.env.DB_HOST,
+    dialect: process.env.DB_DIAL,
+    port: process.env.DB_PORT,
+    logging: false
 })
 
 async function checkConnection() {
