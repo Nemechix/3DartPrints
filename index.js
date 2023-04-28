@@ -2,6 +2,9 @@ require('dotenv').config()
 const morgan = require('morgan')
 const express = require('express')
 const api = express();
+const cors = require('cors')
+
+app.use(cors())
 
 const {
     checkConnection,
