@@ -17,7 +17,8 @@ const {
     deleteDesignByUser,
     updateDesignByUser,
     unlinkPrinterToUser,
-    updatePrinterFromUser
+    updatePrinterFromUser,
+    getUserByUsername
 } = require('../controllers/user.controller')
 const { checkAuth, checkAdmin } = require('../middleware/auth')
 
@@ -26,6 +27,7 @@ router.get('/me', checkAuth, getMyProfile)
 router.delete('/me', checkAuth, deleteMyUser)
 router.put('/me', checkAuth, updateMyUser)
 router.get('/:id/', getUserById)
+router.get('/:username', getUserByUsername)
 router.get('/:id/designs', getUserDesignsById)
 router.post('/me/designs', checkAuth, uploadDesignByUser)
 router.put('/me/designs/:id', checkAuth, updateDesignByUser)
