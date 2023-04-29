@@ -1,7 +1,7 @@
 require('dotenv').config()
 const morgan = require('morgan')
 const express = require('express')
-const api = express();
+const app = express();
 const cors = require('cors')
 
 
@@ -19,11 +19,11 @@ async function startDB() {
 
 }
 
+app.use(cors())
+
 function startExpress() {
-    const app = express()
-        .use(cors(options))
-        .use(express.json())
-        .use(morgan('dev'))
+        app.use(express.json())
+        app.use(morgan('dev'))
 
 
         .use('/api', require('./api/routes/index'))
