@@ -1,8 +1,8 @@
 require('dotenv').config()
 const morgan = require('morgan')
 const express = require('express')
-const app = express();
 const cors = require('cors')
+const app = express();
 
 
 const {
@@ -25,6 +25,13 @@ function startExpress() {
         app.use(express.json())
         app.use(morgan('dev'))
 
+        app.get('api/user/:id', function (req, res, next) {
+            res.json({msg: 'This is CORS-enabled for all origins!'})
+          })
+
+          app.get('/user/:id', function (req, res, next) {
+            res.json({msg: 'This is CORS-enabled for all origins!'})
+          })
 
         .use('/api', require('./api/routes/index'))
 
