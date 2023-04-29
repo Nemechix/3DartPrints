@@ -3,6 +3,7 @@ const morgan = require('morgan')
 const express = require('express')
 const api = express();
 const cors = require('cors')
+const whiteList = ['http://localhost:5173']
 
 
 const {
@@ -22,7 +23,7 @@ async function startDB() {
 function startExpress() {
     const app = express()
         .use(cors({
-            origin: "*"
+            origin: whiteList
         }))
         .use(express.json())
         .use(morgan('dev'))
