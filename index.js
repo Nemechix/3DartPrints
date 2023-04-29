@@ -24,18 +24,17 @@ function startExpress() {
         app.use(cors())
         app.use(express.json())
         app.use(morgan('dev'))
+        app.use('/api', require('./api/routes/index'))
 
-        app.get('api/user/:id', function (req, res, next) {
-            res.json({msg: 'This is CORS-enabled for all origins!'})
-          })
+        app.use(function (req, res, next) {
+            res.setHeader('Access-Control-Allow-Origin', 'http://localhost:5173');
+            res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+            res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+            res.setHeader('Access-Control-Allow-Credentials', true);
+            next();
+            });
 
-          app.get('/user/:id', function (req, res, next) {
-            res.json({msg: 'This is CORS-enabled for all origins!'})
-          })
-
-        .use('/api', require('./api/routes/index'))
-
-        .listen(process.env.PORT, () => {
+        app.listen(process.env.PORT, () => {
             console.log(`Listenting on port ${process.env.PORT}`)
         })
 }
