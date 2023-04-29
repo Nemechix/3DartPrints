@@ -21,7 +21,7 @@ async function startDB() {
 
 function startExpress() {
     const app = express()
-        .use(cors())
+        .use(cors(options))
         .use(express.json())
         .use(morgan('dev'))
 
