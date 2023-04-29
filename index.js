@@ -1,9 +1,8 @@
 require('dotenv').config()
 const morgan = require('morgan')
 const express = require('express')
-const api = express();
+const app = express()
 const cors = require('cors')
-const whiteList = ['http://localhost:5173']
 
 
 const {
@@ -21,10 +20,9 @@ async function startDB() {
 }
 
 function startExpress() {
-    const app = express()
-        .use(cors())
-        .use(express.json())
-        .use(morgan('dev'))
+        app.use(cors())
+        app.use(express.json())
+        app.use(morgan('dev'))
 
 
         .use('/api', require('./api/routes/index'))
