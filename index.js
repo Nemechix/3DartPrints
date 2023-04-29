@@ -19,9 +19,9 @@ async function startDB() {
 
 }
 
-app.use(cors())
 
 function startExpress() {
+        app.use(cors())
         app.use(express.json())
         app.use(morgan('dev'))
 
