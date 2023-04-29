@@ -22,9 +22,7 @@ async function startDB() {
 
 function startExpress() {
     const app = express()
-        .use(cors({
-            origin: whiteList
-        }))
+        .use(cors())
         .use(express.json())
         .use(morgan('dev'))
 
