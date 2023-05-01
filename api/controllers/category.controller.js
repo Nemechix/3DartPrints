@@ -12,22 +12,18 @@ async function getAllCategories(req, res) {
     }
 }
 
-async function getRandomCategory(req, res) {
+async function getRandomCategory() {
     try {
-        const count = await Category.count();
-        const randomIndex = Math.floor(Math.random() * count);
-        const randomCategory = await Category.findOne({ offset: randomIndex });
-    
-        if (!randomCategory) {
-          return res.status(404).send('No categories found');
-        }
-    
-        return res.status(200).json(randomCategory);
-      } catch (error) {
-        console.error(error);
-        return res.status(500).send('Internal server error');
-      }
+      const categories = await Category.findAll({ attributes: ['id'] }); 
+      const randomIndex = Math.floor(Math.random() * categories.length); 
+      const randomCategoryId = categories[randomIndex].id; 
+      const randomCategory = await Category.findByPk(randomCategoryId);
+      return randomCategory;
+    } catch (error) {
+      console.log(error);
+      throw new Error('No se pudo obtener una categoría aleatoria');
     }
+  }
 
 async function createCategory(req, res) {
     try {
