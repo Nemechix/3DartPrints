@@ -91,6 +91,22 @@ async function getDesignsByCategoryId(req, res) {
     }
 }
 
+async function getDesignsByCategoryName(req, res) {
+    try {
+        const category = await Category.findOne({ where: { name: req.params.name } })
+
+        const desings = await category.getDesigns();
+
+        if (desings.length) {
+            return res.status(200).json(desings);
+        } else {
+            return res.status(404).send('Category not found');
+        }
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+}
 
 
-module.exports = { getAllCategories, getCategoryById, createCategory, updateCategoryById, deleteCategoryById, getDesignsByCategoryId,getRandomCategory }
+
+module.exports = { getAllCategories, getCategoryById, createCategory, updateCategoryById, deleteCategoryById, getDesignsByCategoryId,getRandomCategory, getDesignsByCategoryName }
