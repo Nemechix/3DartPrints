@@ -10,7 +10,7 @@ const Category = sequelize.define(
         },
         image: {
             type: DataTypes.STRING,
-            allowNull: true,
+            allowNull: false,
         },
     },
     { updatedAt: false }
