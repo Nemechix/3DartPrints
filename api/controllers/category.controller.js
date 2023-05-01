@@ -14,21 +14,20 @@ async function getAllCategories(req, res) {
 
 async function getRandomCategory(req, res) {
     try {
-        const random = await Category.random()
-        return res.status(200).json(random)
-    } catch (error) {
-        return res.status(500).json(error)
+        const count = await Category.count();
+        const randomIndex = Math.floor(Math.random() * count);
+        const randomCategory = await Category.findOne({ offset: randomIndex });
+    
+        if (!randomCategory) {
+          return res.status(404).send('No categories found');
+        }
+    
+        return res.status(200).json(randomCategory);
+      } catch (error) {
+        console.error(error);
+        return res.status(500).send('Internal server error');
+      }
     }
-}
-
-async function getCategoryById(req, res) {
-    try {
-        const category = await Category.findOne({ where: {id: req.params.id} })
-        return res.status(200).json(category)
-    } catch (error) {
-        return res.status(500).json(error)
-    }
-}
 
 async function createCategory(req, res) {
     try {
