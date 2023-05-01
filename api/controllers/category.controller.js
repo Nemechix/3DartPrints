@@ -12,20 +12,24 @@ async function getAllCategories(req, res) {
     }
 }
 
-/*async function getRandomCategory() {
+async function getRandomCategory(req, res) {
     try {
-      const categories = await Category.findAll({ attributes: ['id'] }); 
-      const randomIndex = Math.floor(Math.random() * categories.length); 
-      const randomCategoryId = categories[randomIndex].id; 
-      const randomCategory = await Category.findByPk(randomCategoryId);
-      return randomCategory;
+        const random = await Category.random()
+        return res.status(200).json(random)
     } catch (error) {
-      console.log(error);
-      throw new Error('No se pudo obtener una categoría aleatoria');
+        return res.status(500).json(error)
     }
-  }*/
+}
 
-  
+async function getCategoryById(req, res) {
+    try {
+        const category = await Category.findOne({ where: {id: req.params.id} })
+        return res.status(200).json(category)
+    } catch (error) {
+        return res.status(500).json(error)
+    }
+}
+
 async function createCategory(req, res) {
     try {
         const category = await Category.create(req.body)
@@ -70,6 +74,22 @@ async function deleteCategoryById(req, res) {
     }
 }
 
+
+async function getDesignsByCategoryId(req, res) {
+    try {
+        const category = await Category.findOne({ where: { id: req.params.id } })
+
+        const desings = await category.getDesigns();
+
+        if (desings.length) {
+            return res.status(200).json(desings);
+        } else {
+            return res.status(404).send('Category not found');
+        }
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+}
 
 async function getDesignsByCategoryId(req, res) {
     try {
