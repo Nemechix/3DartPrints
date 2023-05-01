@@ -12,7 +12,7 @@ async function getAllCategories(req, res) {
     }
 }
 
-async function getRandomCategory() {
+/*async function getRandomCategory() {
     try {
       const categories = await Category.findAll({ attributes: ['id'] }); 
       const randomIndex = Math.floor(Math.random() * categories.length); 
@@ -23,8 +23,9 @@ async function getRandomCategory() {
       console.log(error);
       throw new Error('No se pudo obtener una categoría aleatoria');
     }
-  }
+  }*/
 
+  
 async function createCategory(req, res) {
     try {
         const category = await Category.create(req.body)
