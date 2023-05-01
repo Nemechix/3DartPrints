@@ -28,6 +28,10 @@ const Printer = sequelize.define(
             type: DataTypes.STRING,
             allowNull: false,
         },
+        image: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
     },
     { updatedAt: false }
 )
