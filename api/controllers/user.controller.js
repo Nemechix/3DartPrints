@@ -5,6 +5,8 @@ const Printer = require('../models/printer.models')
 const Material = require('../models/material.models')
 const Software = require('../models/software.models')
 const UserPrinter = require('../models/userprinter.models')
+const UserFavorites = require('../models/userFavorites');
+
 
 async function getAllUsers(req, res) {
     try {
@@ -452,7 +454,6 @@ async function addToFavorites(req, res) {
     }
   }
 
-  const UserFavorites = require('../models/userFavorites');
 
 async function removeFromFavorites(req, res) {
   const { userId, designId } = req.params;
