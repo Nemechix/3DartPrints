@@ -447,6 +447,7 @@ async function addToFavorites(req, res) {
         favorite
       });
     } catch (error) {
+        console.log(designId)
       console.error(error);
       res.status(500).json({
         message: 'Error al agregar diseño a favoritos',
