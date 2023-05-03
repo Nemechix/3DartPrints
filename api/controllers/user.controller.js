@@ -430,6 +430,29 @@ async function myFunction(printers, user) {
 }
 
 
+async function addToFavorites(req, res) {
+    const { userId, designId } = req.body;
+  
+    try {
+      const favorite = await UserFavorites.create({
+        userId,
+        designId
+      });
+  
+      res.status(200).json({
+        message: 'Diseño agregado a favoritos exitosamente',
+        favorite
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({
+        message: 'Error al agregar diseño a favoritos',
+        error
+      });
+    }
+  }
+
+
 
 module.exports = {
     getAllUsers,
@@ -451,5 +474,6 @@ module.exports = {
     unlinkPrinterToUser,
     updatePrinterFromUser,
     getUserByUsername,
-    getUserDesignsByUsername
+    getUserDesignsByUsername,
+    addToFavorites
 }
