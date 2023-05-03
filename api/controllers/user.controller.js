@@ -433,7 +433,8 @@ async function myFunction(printers, user) {
 
 
 async function addToFavorites(req, res) {
-    const { userId, designId } = req.body;
+    const { designId } = req.body;
+    const userId = req.user.id;
   
     try {
       const favorite = await UserFavorites.create({
@@ -453,6 +454,7 @@ async function addToFavorites(req, res) {
       });
     }
   }
+  
 
 
 async function removeFromFavorites(req, res) {
