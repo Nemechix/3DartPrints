@@ -452,6 +452,31 @@ async function addToFavorites(req, res) {
     }
   }
 
+  const UserFavorites = require('../models/userFavorites');
+
+async function removeFromFavorites(req, res) {
+  const { userId, designId } = req.params;
+
+  try {
+    const result = await UserFavorites.destroy({
+      where: {
+        userId,
+        designId
+      }
+    });
+
+    if (result) {
+      return res.status(200).json({ message: 'Diseño Eliminado de favoritos exitosamente' });
+    } else {
+      return res.status(404).json({ message: 'Diseño no encontrado en favoritos' });
+    }
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: 'Error al eliminar diseño de favoritos' });
+  }
+};
+
+
 
 
 module.exports = {
@@ -475,5 +500,6 @@ module.exports = {
     updatePrinterFromUser,
     getUserByUsername,
     getUserDesignsByUsername,
-    addToFavorites
+    addToFavorites,
+    removeFromFavorites
 }

@@ -20,6 +20,7 @@ const {
     updatePrinterFromUser,
     getUserByUsername,
     getUserDesignsByUsername,
+    removeFromFavorites,
 } = require('../controllers/user.controller')
 const { checkAuth, checkAdmin } = require('../middleware/auth')
 
@@ -42,7 +43,7 @@ router.get('/:userid/printers/:printerid/materials', checkAuth, getUserPrinterMa
 router.post('/', checkAuth, checkAdmin, createUser)
 router.put('/:id', checkAuth, checkAdmin, updateUserById)
 router.delete('/:id', checkAuth, checkAdmin, deleteUserById)
-router.post('/designs/:id/favorites', checkAuth, addDesignToFavorites);
+router.delete('/users/:userId/favorites/:designId', removeFromFavorites);
 
 
 module.exports = router
