@@ -5,7 +5,7 @@ const Printer = require('../models/printer.models')
 const Material = require('../models/material.models')
 const Software = require('../models/software.models')
 const UserPrinter = require('../models/userprinter.models')
-const UserFavorites = require('../models/userFavorites');
+const UserFavorites = require('../models/userFavorites.models');
 
 
 async function getAllUsers(req, res) {
