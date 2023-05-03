@@ -9,7 +9,7 @@ const OrderPrints = require('../api/models/orderprints.models')
 const OrderDesign = require('../api/models/orderdesign.models')
 const Order = require('../api/models/order.models')
 const Cart = require('../api/models/cart_models')
-const Favorites = require('../api/models/favorites_models')
+const UserFavorites = require('../api/models/userFavorites')
 
 
 function addRelationsToModels() {
@@ -70,10 +70,10 @@ function addRelationsToModels() {
         Cart.belongsTo(Design);
 
         User.hasMany(Favorites);
-        Favorites.belongsTo(User);
+        UserFavorites.belongsTo(User);
 
         Design.hasMany(Favorites);
-        Favorites.belongsTo(Design);
+        UserFavorites.belongsTo(Design);
 
 
 
