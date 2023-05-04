@@ -13,7 +13,7 @@ router.get('/:id/category', getCategoryByDesignId)
 router.post('/', checkAuth, checkAdmin, createDesign)
 router.put('/:id', checkAuth, checkAdmin, updateDesignById)
 router.delete('/:id', checkAuth, checkAdmin, deleteDesignById)
-router.post('/designs/:designId/favorites', checkAuth, addToFavorites);
+router.post('/favorites', checkAuth, addToFavorites);
 
 
 

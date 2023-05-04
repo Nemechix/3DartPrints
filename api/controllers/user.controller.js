@@ -437,14 +437,27 @@ async function addToFavorites(req, res) {
     const userId = req.user.id;
   
     try {
-      const favorite = await UserFavorites.create({
+      const favorite = await UserFavorites.findOne({
+        where: {
+          userId,
+          designId
+        }
+      });
+  
+      if (favorite) {
+        return res.status(400).json({
+          message: 'El diseño ya ha sido agregado a favoritos'
+        });
+      }
+  
+      const newFavorite = await UserFavorites.create({
         userId,
         designId
       });
   
       res.status(200).json({
         message: 'Diseño agregado a favoritos exitosamente',
-        favorite
+        favorite: newFavorite
       });
     } catch (error) {
       console.error(error);
@@ -454,6 +467,7 @@ async function addToFavorites(req, res) {
       });
     }
   }
+  
   
 
 
