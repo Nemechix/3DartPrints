@@ -6,18 +6,20 @@ const User = sequelize.define(
     {
         name: {
             type: DataTypes.STRING,
-            allowNull: false,
+            defaultValue: '',
         },
         surname: {
             type: DataTypes.STRING,
-            allowNull: false,
+            defaultValue: '',
         },
         username: {
             type: DataTypes.STRING,
             allowNull: false,
+            unique: true,
         },
         email: {
             type: DataTypes.STRING,
+            unique: true,
             validate: {
                 is: {
                     args: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
@@ -40,19 +42,19 @@ const User = sequelize.define(
         },
         verified: {
             type: DataTypes.BOOLEAN,
-            allowNull: false,
+            defaultValue: false,
         },
         role: {
             type: DataTypes.ENUM('admin', 'user'),
-            allowNull: false,
+            defaultValue: 'user',
         },
         designer: {
             type: DataTypes.BOOLEAN,
-            allowNull: false,
+            defaultValue: false,
         },
         printer: {
             type: DataTypes.BOOLEAN,
-            allowNull: false,
+            defaultValue: false,
 
 /*         createdAt: {
             type: DataTypes.STRING,
