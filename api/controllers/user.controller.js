@@ -471,28 +471,38 @@ async function addToFavorites(req, res) {
   
 
 
-async function removeFromFavorites(req, res) {
-  const { userId, designId } = req.params;
-
-  try {
-    const result = await UserFavorites.destroy({
-      where: {
-        userId,
-        designId
+  async function removeFromFavorites(req, res) {
+    const { designId } = req.body;
+    const userId = req.user.id;
+  
+    try {
+      const favorite = await UserFavorites.findOne({
+        where: {
+          userId,
+          designId
+        }
+      });
+  
+      if (!favorite) {
+        return res.status(404).json({
+          message: 'El diseño no está en la lista de favoritos'
+        });
       }
-    });
-
-    if (result) {
-      return res.status(200).json({ message: 'Diseño Eliminado de favoritos exitosamente' });
-    } else {
-      return res.status(404).json({ message: 'Diseño no encontrado en favoritos' });
+  
+      await favorite.destroy();
+  
+      res.status(200).json({
+        message: 'Diseño eliminado de la lista de favoritos exitosamente'
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({
+        message: 'Error al eliminar diseño de favoritos',
+        error
+      });
     }
-  } catch (error) {
-    console.log(error);
-    return res.status(500).json({ message: 'Error al eliminar diseño de favoritos' });
   }
-};
-
+  
 
 
 

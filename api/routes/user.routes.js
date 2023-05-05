@@ -43,7 +43,7 @@ router.get('/:userid/printers/:printerid/materials', checkAuth, getUserPrinterMa
 router.post('/', checkAuth, checkAdmin, createUser)
 router.put('/:id', checkAuth, checkAdmin, updateUserById)
 router.delete('/:id', checkAuth, checkAdmin, deleteUserById)
-router.delete('/users/:userId/favorites/:designId', removeFromFavorites);
+router.delete('/favorites', removeFromFavorites);
 
 
 module.exports = router
