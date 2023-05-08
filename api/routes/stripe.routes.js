@@ -12,42 +12,33 @@ const { checkAuth, checkAdmin } = require('../middleware/auth')
 
 
 router.post("/checkout", async (req, res) => {
+  const items = req.body.items
+  let lineItems = []
 
-
-    console.log("items are", req.body.items)
-    const items = req.body.items
-    let lineItems = []
-    items.forEach((item) => {
-        lineItems.push(
-            {
-            price_data: {
-            currency: 'usd',
-            product_data: {
-                name: item.name,
-                description: item.description,
-                images: item.image,
-      },
-                unit_amount: item.price,
-    },
-    quantity: item.quantity,
-  },
-        )
-            console.log("line items are", lineItems)
-
+  items.forEach((item) => {
+    lineItems.push({
+      price: item.stripeId,
+      quantity: item.quantity
     })
+    console.log(lineItems)
+  })
 
+  try {
     const session = await stripe.checkout.sessions.create({
-        line_items: lineItems,
-        mode: 'payment',
-        success_url: "http://localhost:3000/success",
-        cancel_url: "http://localhost:3000/cancel"
-
+      payment_method_types: ["card"],
+      line_items: lineItems,
+      mode: "payment",
+      success_url: "http://localhost:3000/success",
+      cancel_url: "http://localhost:3000/cancel"
     })
 
-    res.send(JSON.stringify({
-        url: session.url
-    }))
+    res.json({ url: session.url })
+  } catch (err) {
+    console.error(err)
+    res.status(500).json({ error: err.message })
+  }
 })
+
 
 
 
