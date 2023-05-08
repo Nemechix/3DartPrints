@@ -17,10 +17,12 @@ router.post("/checkout", async (req, res) => {
     console.log("items are", req.body.items)
     const items = req.body.items
     let lineItems = []
+    console.log("line items are", lineItems)
     items.forEach((item) => {
         lineItems.push(
             {
-                price: item.price,
+                price: item.id,
+                quantity: item.quantity
             }
         )
     })
