@@ -209,7 +209,7 @@ async function uploadDesignByUser(req, res) {
 async function getMyProfile(req, res) {
     try {
         const user = req.user;
-        console.log(user)
+        // console.log(user)
         if (user) {
             return res.status(200).json({ user });
         } else {

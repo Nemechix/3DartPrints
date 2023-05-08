@@ -14,6 +14,8 @@ const checkAuth = (req, res, next) => {
         if (!user) {
             return res.status(400).send('invalid token')
         }
+        
+        delete user.password
         req.user = user
         next()
     })
