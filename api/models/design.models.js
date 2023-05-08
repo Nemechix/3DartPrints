@@ -30,7 +30,7 @@ const Design = sequelize.define(
         },
         quantity: {
             type: DataTypes.NUMBER,
-            allowNull: false,
+            allowNull: true,
         }
     },
     { updatedAt: false }
