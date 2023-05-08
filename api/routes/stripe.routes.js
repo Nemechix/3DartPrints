@@ -14,7 +14,7 @@ const { checkAuth, checkAdmin } = require('../middleware/auth')
 router.post("/checkout", async (req, res) => {
 
 
-    console.log(req.body.items)
+    console.log("items are", req.body.items)
     const items = req.body.items
     let lineItems = []
     items.forEach((item) => {
