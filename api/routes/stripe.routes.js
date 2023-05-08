@@ -13,7 +13,6 @@ const { checkAuth, checkAdmin } = require('../middleware/auth')
 
 router.post("/checkout", async (req, res) => {
   const items = req.body.items
-  console.log(items)
   let lineItems = []
 
   items.forEach((item) => {
@@ -21,7 +20,6 @@ router.post("/checkout", async (req, res) => {
       price: item.stripeId,
       quantity: item.quantity
     })
-    console.log(lineItems)
   })
 
   try {
