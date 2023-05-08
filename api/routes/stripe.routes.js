@@ -13,6 +13,7 @@ const { checkAuth, checkAdmin } = require('../middleware/auth')
 
 router.post("/checkout", async (req, res) => {
   const items = req.body.items
+  console.log
   let lineItems = []
 
   items.forEach((item) => {
@@ -35,7 +36,7 @@ router.post("/checkout", async (req, res) => {
     res.json({ url: session.url })
   } catch (err) {
     console.error(err)
-    res.status(500).json({ error: err.message })
+    res.status(500).send("Test")
   }
 })
 
