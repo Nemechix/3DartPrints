@@ -20,8 +20,7 @@ router.post("/checkout", async (req, res) => {
     items.forEach((item) => {
         lineItems.push(
             {
-                price: item.id,
-                quantity: item.quantity
+                price: item.price,
             }
         )
     })
