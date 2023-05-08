@@ -4,6 +4,10 @@ const { sequelize } = require('../../database')
 const Design = sequelize.define(
     'design',
     {
+        stripeId: {
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
         name: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -22,6 +26,10 @@ const Design = sequelize.define(
         },
         price: {
             type: DataTypes.FLOAT,
+            allowNull: false,
+        },
+        quantity: {
+            type: DataTypes.NUMBER,
             allowNull: false,
         }
     },
