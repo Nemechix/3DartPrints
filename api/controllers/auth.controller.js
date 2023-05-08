@@ -7,8 +7,9 @@ const signUp = async (req, res) => {
     try {
     req.body.password = bcrypt.hashSync(req.body.password, 10)
     req.body.role = 'user'
-    const user = await User.create(req.body)    
-    res.status(200).json(user)
+    const user = await User.create(req.body) 
+    delete user.password   
+    res.status(200).send('Usuario correctamente registrado')
     } catch (error) {
         console.error(error)
         res.status(500).send('Error not create user')
