@@ -17,14 +17,23 @@ router.post("/checkout", async (req, res) => {
     console.log("items are", req.body.items)
     const items = req.body.items
     let lineItems = []
-    console.log("line items are", lineItems)
     items.forEach((item) => {
         lineItems.push(
             {
-                price: item.stripeId,
-                quantity: item.quantity
-            }
+            price_data: {
+            currency: 'usd',
+            product_data: {
+                name: item.name,
+                description: item.description,
+                images: item.image,
+      },
+                unit_amount: item.price,
+    },
+    quantity: item.quantity,
+  },
         )
+            console.log("line items are", lineItems)
+
     })
 
     const session = await stripe.checkout.sessions.create({
