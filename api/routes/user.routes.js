@@ -28,6 +28,7 @@ router.get('/', getAllUsers)
 router.get('/me', checkAuth, getMyProfile)
 router.delete('/me', checkAuth, deleteMyUser)
 router.put('/me', checkAuth, updateMyUser)
+router.delete('/favorites', checkAuth, removeFromFavorites);
 router.get('/:id/', getUserById)
 router.get('/profile/:username', getUserByUsername)
 router.get('/:id/designs', getUserDesignsById)
@@ -43,7 +44,6 @@ router.get('/:userid/printers/:printerid/materials', checkAuth, getUserPrinterMa
 router.post('/', checkAuth, checkAdmin, createUser)
 router.put('/:id', checkAuth, checkAdmin, updateUserById)
 router.delete('/:id', checkAuth, checkAdmin, deleteUserById)
-router.delete('/favorites', checkAuth, removeFromFavorites);
 
 
 module.exports = router
