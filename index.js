@@ -16,7 +16,7 @@ const addRelationsToModels = require('./database/relations')
 async function startDB() {
     await checkConnection()
     await addRelationsToModels()
-    await syncModels({ alter: true })
+    await syncModels('alter')
 
 }
 
