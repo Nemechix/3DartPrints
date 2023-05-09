@@ -14,13 +14,13 @@ async function getAllCategories(req, res) {
 
 async function getRandomCategory(req, res) {
   try {
-    const categories = await Category.find();
+    const categories = await Category.findAll();
     const randomIndex = Math.floor(Math.random() * categories.length);
     const randomCategory = categories[randomIndex];
-    res.status(200).json(randomCategory);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Error al obtener la categoría aleatoria.' });
+    return res.json(randomCategory);
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ error: 'Error al obtener la categoría aleatoria' });
   }
 }
 
