@@ -12,17 +12,17 @@ async function getAllCategories(req, res) {
     }
 }
 
-const getRandomCategory = async (req, res) => {
+async function getRandomCategory(req, res) {
   try {
-    const count = await Category.countDocuments(); // Obtener el número total de categorías en la base de datos
-    const randomIndex = Math.floor(Math.random() * count); // Generar un índice aleatorio dentro del rango de categorías existentes
-    const randomCategory = await Category.findOne().skip(randomIndex); // Obtener la categoría aleatoria utilizando el índice generado
-    res.status(200).json(randomCategory); // Devolver la categoría aleatoria como respuesta
+    const categories = await Category.find();
+    const randomIndex = Math.floor(Math.random() * categories.length);
+    const randomCategory = categories[randomIndex];
+    res.status(200).json(randomCategory);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Hubo un error al obtener la categoría aleatoria.' });
+    res.status(500).json({ message: 'Error al obtener la categoría aleatoria.' });
   }
-};
+}
 
 async function getCategoryById(req, res) {
     try {
