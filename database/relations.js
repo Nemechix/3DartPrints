@@ -69,7 +69,7 @@ function addRelationsToModels() {
         Design.hasMany(Cart);
         Cart.belongsTo(Design);
 
-        User.belongsToMany(Design, { through: UserFavorites, foreignKey: 'userId' });
+        User.belongsToMany(Design, { through: UserFavorites, foreignKey: 'userId', as: 'favorites' });
         Design.belongsToMany(User, { through: UserFavorites, foreignKey: 'designId' });
 
 

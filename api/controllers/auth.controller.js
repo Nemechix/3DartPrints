@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt')
 const User = require('../models/user.models')
+const Design = require('../models/design.models');
 const router = require('express').Router()
 const jwt = require('jsonwebtoken');
 
@@ -17,7 +18,12 @@ const signUp = async (req, res) => {
 }
 
 const login = async (req, res) => {
-    const user = await User.findOne({ where: { email: req.body.email } })
+    const user = await User.findOne({ 
+        where: { 
+            email: req.body.email 
+        },
+        include: [{model: Design, as: 'favorites'}]
+    })
     if (!user) {
         return res.status(403).send('User not found')
     }
@@ -28,7 +34,11 @@ const login = async (req, res) => {
         }
 
       const token = jwt.sign({ email: user.email }, process.env.SECRET, { expiresIn: '8h'})
-        return res.status(201).json({ token, role: user.role })
+        return res.status(201).json({ 
+            token, 
+            role: user.role, 
+            favorites: user.favorites 
+        })
     })
 }
 
