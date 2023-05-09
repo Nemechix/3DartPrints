@@ -498,9 +498,17 @@ async function addToFavorites(req, res) {
       }
   
       await favorite.destroy();
-  
+      
+      const user = await User.findOne({
+        where: {
+          id: userId
+        },
+        include: [{model: Design, as: 'favorites'}]
+      })
+
       res.status(200).json({
-        message: 'Diseño eliminado de la lista de favoritos exitosamente'
+        message: 'Diseño eliminado de la lista de favoritos exitosamente',
+        favorites: user.favorites
       });
     } catch (error) {
       console.error(error);
