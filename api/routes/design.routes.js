@@ -8,12 +8,12 @@ const { addToFavorites } = require('../controllers/user.controller')
 
 router.get('/', getAllDesign)
 router.get('/random', getRandomDesign)
+router.post('/favorites', checkAuth, addToFavorites);
 router.get('/:id', getDesignById)
 router.get('/:id/category', getCategoryByDesignId)
 router.post('/', checkAuth, checkAdmin, createDesign)
 router.put('/:id', checkAuth, checkAdmin, updateDesignById)
 router.delete('/:id', checkAuth, checkAdmin, deleteDesignById)
-router.post('/favorites', checkAuth, addToFavorites);
 
 
 

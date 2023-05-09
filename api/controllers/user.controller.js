@@ -434,12 +434,12 @@ async function myFunction(printers, user) {
 
 async function addToFavorites(req, res) {
     const { designId } = req.body;
-    const userId = req.user.id;
+    let user = req.user;
   
     try {
       const favorite = await UserFavorites.findOne({
         where: {
-          userId,
+          userId: user.id,
           designId
         }
       });
@@ -451,13 +451,21 @@ async function addToFavorites(req, res) {
       }
   
       const newFavorite = await UserFavorites.create({
-        userId,
+        userId: user.id,
         designId
       });
   
+      user = await User.findOne({
+        where: {
+          id: user.id
+        },
+        include: [{model: Design, as: 'favorites'}]
+      })
+      console.log('FAVORITOS: ', user.favorites)
+
       res.status(200).json({
         message: 'Diseño agregado a favoritos exitosamente',
-        favorite: newFavorite
+        favorites: user.favorites
       });
     } catch (error) {
       console.error(error);
