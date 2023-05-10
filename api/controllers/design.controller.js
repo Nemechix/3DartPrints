@@ -40,8 +40,6 @@ async function getDesignById(req, res) {
 const createDesign = async (req, res) => {
   try {
     const { name, description, file, image, price, quantity, categoryName } = req.body;
-
-    // Crea el producto en Stripe
     const stripeProduct = await stripe.products.create({
       name: name,
     });
