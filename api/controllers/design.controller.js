@@ -1,4 +1,5 @@
 const Design = require('../models/design.models')
+const Category = require ('../models/category.models')
 
 
 async function getAllDesign(req, res) {
@@ -32,14 +33,39 @@ async function getDesignById(req, res) {
     }
 }
 
-async function createDesign(req, res) {
-    try {
-        const design = await Design.create(req.body)
-        return res.status(200).json({ message: 'Design created', design: design })
-    } catch (error) {
-        return res.status(500).json(error)
-    }
-}
+const createDesign = async (req, res) => {
+  try {
+    const { name, description, file, image, price, quantity, categoryName } = req.body;
+
+    // Crea el diseño
+    const design = await Design.create({
+      name,
+      description,
+      file,
+      image,
+      price,
+      quantity,
+      userId: req.user.id,
+    });
+
+    const categories = await Category.findAll({
+      where: {
+        name: categoryName,
+      },
+    });
+    await design.addCategories(categories);
+
+    const createdDesign = await Design.findByPk(design.id, { include: Category });
+
+    return res.status(200).json({ message: 'Design created', design: createdDesign });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json(error);
+  }
+};
+
+
+
 
 async function updateDesignById(req, res) {
     try {
