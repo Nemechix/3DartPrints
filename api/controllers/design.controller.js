@@ -1,5 +1,7 @@
 const Design = require('../models/design.models')
 const Category = require ('../models/category.models')
+const stripe = require('stripe')('sk_test_51N4PBRLq0Q7kbXgYAxRg1hiePFEE5E5QVivcLfo1S3qIfz6prhLArOpy1iaF9ZkZqU2rTqErJjm9GcGwWgWhmpck00nvP7r8Ak')
+
 
 
 async function getAllDesign(req, res) {
@@ -33,11 +35,17 @@ async function getDesignById(req, res) {
     }
 }
 
+
 const createDesign = async (req, res) => {
   try {
     const { name, description, file, image, price, quantity, categoryName } = req.body;
 
-    // Crea el diseño
+    const stripeProduct = await stripe.products.create({
+      name: name
+    });
+
+    const stripeProductId = stripeProduct.id;
+
     const design = await Design.create({
       name,
       description,
@@ -45,6 +53,7 @@ const createDesign = async (req, res) => {
       image,
       price,
       quantity,
+      stripeId: stripeProductId,
       userId: req.user.id,
     });
 
@@ -63,6 +72,7 @@ const createDesign = async (req, res) => {
     return res.status(500).json(error);
   }
 };
+
 
 
 
