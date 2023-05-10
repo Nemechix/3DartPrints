@@ -36,15 +36,26 @@ async function getDesignById(req, res) {
 }
 
 
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+
 const createDesign = async (req, res) => {
   try {
     const { name, description, file, image, price, quantity, categoryName } = req.body;
 
+    // Crea el producto en Stripe
     const stripeProduct = await stripe.products.create({
-      name: name
+      name: name,
     });
 
     const stripeProductId = stripeProduct.id;
+
+    const stripePrice = await stripe.prices.create({
+      product: stripeProductId,
+      unit_amount: price * 100, 
+      currency: 'usd',
+    });
+
+    const stripePriceId = stripePrice.id;
 
     const design = await Design.create({
       name,
@@ -53,7 +64,7 @@ const createDesign = async (req, res) => {
       image,
       price,
       quantity,
-      stripeId: stripeProductId,
+      stripeId: stripePriceId,
       userId: req.user.id,
     });
 
@@ -72,6 +83,7 @@ const createDesign = async (req, res) => {
     return res.status(500).json(error);
   }
 };
+
 
 
 
