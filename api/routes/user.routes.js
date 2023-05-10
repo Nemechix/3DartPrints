@@ -21,6 +21,7 @@ const {
     getUserByUsername,
     getUserDesignsByUsername,
     removeFromFavorites,
+    addToFavorites,
 } = require('../controllers/user.controller')
 const { checkAuth, checkAdmin } = require('../middleware/auth')
 
@@ -28,6 +29,7 @@ router.get('/', getAllUsers)
 router.get('/me', checkAuth, getMyProfile)
 router.delete('/me', checkAuth, deleteMyUser)
 router.put('/me', checkAuth, updateMyUser)
+router.post('/favorites', checkAuth, addToFavorites);
 router.delete('/favorites', checkAuth, removeFromFavorites);
 router.get('/:id/', getUserById)
 router.get('/profile/:username', getUserByUsername)
