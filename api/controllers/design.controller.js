@@ -36,7 +36,6 @@ async function getDesignById(req, res) {
 }
 
 
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 const createDesign = async (req, res) => {
   try {
