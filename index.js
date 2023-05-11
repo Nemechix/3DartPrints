@@ -3,7 +3,6 @@ const morgan = require('morgan')
 const express = require('express')
 const cors = require('cors')
 const app = express();
-const stripe = require('stripe')('sk_test_51N4PBRLq0Q7kbXgYAxRg1hiePFEE5E5QVivcLfo1S3qIfz6prhLArOpy1iaF9ZkZqU2rTqErJjm9GcGwWgWhmpck00nvP7r8Ak')
 
 
 const {

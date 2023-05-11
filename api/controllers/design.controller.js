@@ -42,6 +42,9 @@ const createDesign = async (req, res) => {
     const { name, description, file, image, price, quantity, categoryName } = req.body;
     const stripeProduct = await stripe.products.create({
       name: name,
+      metadata: {
+        design_name: name
+  }
     });
 
     const stripeProductId = stripeProduct.id;
